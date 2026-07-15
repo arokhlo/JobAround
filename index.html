@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>JobScout AI UK — intelligent local job discovery</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+:root{--ink:#202421;--paper:#f5f2e9;--card:#fffefa;--green:#173b30;--green2:#285444;--blue:#145ea8;--red:#bd1730;--line:#d8d1bf;--muted:#6c685e;--gold:#a87816;--shadow:0 12px 34px rgba(23,59,48,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Inter,system-ui,sans-serif;background:var(--paper);background-image:radial-gradient(circle at 1px 1px,rgba(23,59,48,.055) 1px,transparent 1px);background-size:22px 22px}
+button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padding:18px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:13px}.logo{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:white;background:linear-gradient(145deg,var(--green),var(--green2));font:800 23px 'Archivo Narrow';box-shadow:0 8px 20px rgba(23,59,48,.22)}h1{font:800 27px/1 'Archivo Narrow';margin:0;color:var(--green)}.subtitle{font-size:13px;color:var(--muted);margin-top:5px}.uk{padding:6px 11px;border-radius:99px;color:white;background:var(--red);font:800 11px 'Archivo Narrow';letter-spacing:.08em}
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:14px;margin-bottom:14px}.panel{background:rgba(255,254,250,.95);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.intro{padding:23px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}.intro h2{font:800 35px/1.05 'Archivo Narrow';margin:8px 0 11px;color:var(--green)}.intro p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}.trust{padding:19px;background:linear-gradient(145deg,var(--green),#244c3e);color:white}.trust h3{font:800 18px 'Archivo Narrow';margin:0 0 11px}.trust-row{display:flex;gap:9px;margin:10px 0;font-size:12px;line-height:1.45;color:rgba(255,255,255,.82)}.tick{width:21px;height:21px;flex:0 0 21px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);color:#bff5d7;font-weight:800}
+.form-panel{padding:19px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:15px}.section-head h3{font:800 20px 'Archivo Narrow';color:var(--green);margin:0}.section-head span{font-size:11px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}.field{grid-column:span 4}.field.wide{grid-column:span 6}.field.full{grid-column:1/-1}label{display:block;margin-bottom:6px;color:var(--green);font:800 11px 'Archivo Narrow';letter-spacing:.05em;text-transform:uppercase}.optional{color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0}.control{width:100%;min-height:45px;border:1.5px solid #c5bca5;border-radius:9px;background:#fff;padding:10px 12px;color:var(--ink);outline:none}.control:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(20,94,168,.13)}.uppercase-input{text-transform:uppercase}textarea.control{min-height:88px;resize:vertical}.role-combobox{position:relative}.role-suggestions{position:absolute;z-index:30;top:calc(100% + 5px);left:0;right:0;max-height:250px;overflow:auto;margin:0;padding:6px;list-style:none;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 34px rgba(23,59,48,.16)}.role-suggestions[hidden]{display:none}.role-option{padding:9px 10px;border-radius:7px;cursor:pointer;font-size:13px;color:var(--ink)}.role-option:hover,.role-option.active{background:#eef5fb;color:var(--blue)}.role-option small{display:block;margin-top:2px;color:var(--muted);font-size:10.5px}.role-help{margin-top:5px;color:var(--muted);font-size:10.5px}.filebox{border:1.5px dashed #aaa187;border-radius:10px;padding:12px;background:rgba(23,59,48,.025)}.filebox input{width:100%;font-size:12px}.file-note{font-size:11px;color:var(--muted);margin-top:7px}.consent{display:flex;gap:9px;align-items:flex-start;font-size:11px;color:var(--muted);line-height:1.45;margin-top:3px}.consent input{margin-top:2px;accent-color:var(--green)}
+.actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:15px}.primary,.secondary{min-height:45px;border-radius:9px;padding:10px 18px;font-weight:800;cursor:pointer}.primary{border:0;background:var(--green);color:#fff;box-shadow:0 7px 17px rgba(23,59,48,.2)}.primary:hover{background:var(--green2);transform:translateY(-1px)}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}.secondary:hover{border-color:var(--blue);color:var(--blue)}.secondary.small{min-height:34px;padding:6px 12px;font-size:12px}.secondary.danger:hover{border-color:var(--red);color:var(--red)}.status{font-size:12px;color:var(--muted);margin-left:auto}.status.good{color:#147347}.status.bad{color:var(--red)}
+.profile-bar{margin-bottom:14px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#eef5fb;border:1px solid rgba(20,94,168,.22)}.profile-bar-text{display:flex;flex-direction:column;gap:2px}.profile-bar-text b{font:800 13px 'Archivo Narrow';color:var(--blue)}.profile-bar-text span{font-size:11px;color:var(--muted)}
+.data-panel{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;margin-top:12px;background:rgba(23,59,48,.035);border:1px solid var(--line);border-radius:10px;font-size:11.5px;color:var(--muted)}.data-panel b{color:var(--green)}.data-panel .actions2{display:flex;gap:8px}
+.results-wrap{margin-top:14px}.results-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 17px;border-bottom:2px solid var(--green)}.results-head h3{font:800 19px 'Archivo Narrow';color:var(--green);margin:0}.results-head small{color:var(--muted)}.source-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:14px}.source{display:block;text-decoration:none;border:1px solid var(--line);border-radius:11px;padding:11px;background:#fff;color:var(--ink);transition:.15s}.source:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 7px 16px rgba(20,94,168,.08)}.source b{display:block;font-size:12px;color:var(--green)}.source span{font-size:10.5px;color:var(--muted)}
+.ai-summary{margin:0 14px 14px;padding:13px;border-radius:11px;background:#eef5fb;border:1px solid rgba(20,94,168,.18);font-size:12px;line-height:1.55;color:#334e66}.job-list{display:grid;gap:10px;padding:0 14px 16px}.job{display:grid;grid-template-columns:1fr auto;gap:13px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff}.job:hover{box-shadow:0 8px 20px rgba(23,59,48,.07)}.job h4{margin:0 0 5px;font-size:15px}.meta{font-size:11.5px;color:var(--muted);line-height:1.6}.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.badge{padding:3px 7px;border-radius:99px;background:rgba(23,59,48,.07);color:var(--green);font-size:10px;font-weight:700}.score{text-align:right}.score strong{display:block;font:800 25px 'Archivo Narrow';color:var(--green)}.score small{font-size:10px;color:var(--muted)}.score.unavailable strong{font-size:14px;color:var(--muted)}.score-breakdown{margin-top:7px;max-width:210px;font-size:9.5px;line-height:1.45;color:var(--muted);white-space:normal}.score-breakdown b{color:var(--green)}.apply{display:inline-block;margin-top:8px;text-decoration:none;color:white;background:var(--blue);padding:7px 10px;border-radius:7px;font-size:11px;font-weight:800}.empty{padding:32px;text-align:center;color:var(--muted);font-size:13px}.architecture{padding:17px;margin-top:14px}.architecture h3{font:800 19px 'Archivo Narrow';color:var(--green);margin:0 0 12px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.step{padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:11px;color:var(--muted);line-height:1.45}.step b{display:block;color:var(--green);margin-bottom:4px}.warning{margin-top:12px;padding:11px;border-radius:9px;background:#fff7e5;border:1px solid #e6d098;color:#6d5720;font-size:11px;line-height:1.55}footer{text-align:center;color:var(--muted);font-size:10.5px;padding:18px}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.field,.field.wide{grid-column:span 6}.source-grid{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr 1fr}.flow .step:last-child{grid-column:1/-1}}@media(max-width:560px){.app{padding:10px}.topbar{align-items:flex-start}.uk{display:none}.intro h2{font-size:29px}.field,.field.wide{grid-column:1/-1}.source-grid{grid-template-columns:1fr}.job{grid-template-columns:1fr}.score{text-align:left}.actions{flex-wrap:wrap}.status{width:100%;margin:0}.flow{grid-template-columns:1fr}.flow .step:last-child{grid-column:auto}}
+
+/* Shared JobScout AI UK component colour aliases */
+:root{--os-green:var(--green);--os-green-light:var(--green2);--route-blue:var(--blue);--postbox-red:var(--red);--hairline:var(--line);--hairline-strong:#b7af98;--paper-raised:var(--card)}
+  /* ---- Supabase admin analytics ---- */
+  .admin-trigger{
+    position:fixed;right:9px;bottom:9px;z-index:700;border:0;background:transparent;
+    color:var(--muted);font:700 9px/1 'Inter',sans-serif;letter-spacing:.08em;
+    padding:7px 8px;border-radius:999px;opacity:.22;cursor:pointer;user-select:none;
+    transition:opacity .2s ease,background .2s ease,color .2s ease,transform .2s ease;
+  }
+  .admin-trigger:hover,.admin-trigger:focus-visible{opacity:.55;background:rgba(27,58,47,.06);color:var(--os-green)}
+  .admin-trigger:active{transform:scale(.94)}
+  .admin-trigger .admin-taps{display:none}
+
+  .admin-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(15,22,19,.68);backdrop-filter:blur(10px)}
+  .admin-overlay[hidden]{display:none}
+  .admin-shell{width:min(1120px,100%);max-height:min(92vh,920px);overflow:hidden;background:#FCFBF7;border:1px solid rgba(255,255,255,.32);border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.38);color:var(--ink)}
+  .admin-login{width:min(440px,100%);padding:26px;background:linear-gradient(145deg,#FFFEFA,#F3EFE4);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.5)}
+  .admin-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}.admin-brand-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:var(--os-green);color:#fff;font-size:20px;box-shadow:0 8px 20px rgba(27,58,47,.24)}
+  .admin-brand h2{margin:0;font:800 24px/1.05 'Archivo Narrow',sans-serif;color:var(--os-green)}.admin-brand p{margin:4px 0 0;color:var(--muted);font-size:12.5px}
+  .admin-field{margin:0 0 13px}.admin-field label{display:flex;justify-content:space-between;gap:8px;margin-bottom:6px;font:700 11px 'Inter',sans-serif;color:var(--os-green);letter-spacing:.03em;text-transform:uppercase}
+  .admin-input-wrap{position:relative}.admin-input,.admin-select{width:100%;min-height:44px;border:1px solid #C8C0AC;border-radius:10px;background:#fff;color:var(--ink);padding:10px 12px;font:500 14px 'Inter',sans-serif;outline:none}.admin-input:focus,.admin-select:focus{border-color:var(--route-blue);box-shadow:0 0 0 4px rgba(26,95,180,.13)}
+  .admin-password-toggle{position:absolute;right:7px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);padding:7px;border-radius:8px;cursor:pointer}
+  .admin-check{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;margin:2px 0 14px}.admin-check input{accent-color:var(--os-green)}
+  .admin-error{min-height:18px;color:var(--postbox-red);font-size:12.5px;font-weight:600;margin:0 0 8px}.admin-note{font-size:11.5px;line-height:1.5;color:var(--muted);margin-top:13px;padding:10px 11px;background:rgba(26,95,180,.06);border:1px solid rgba(26,95,180,.14);border-radius:9px}
+  .admin-actions{display:flex;gap:9px}.admin-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;border-radius:9px;border:1px solid #C8C0AC;padding:8px 13px;background:#fff;color:var(--ink);font:700 12.5px 'Inter',sans-serif;cursor:pointer;transition:.16s ease}.admin-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(27,58,47,.1)}.admin-btn:disabled{opacity:.55;cursor:wait;transform:none}.admin-btn.primary{background:var(--os-green);border-color:var(--os-green);color:#fff}.admin-btn.danger{color:var(--postbox-red);border-color:rgba(200,16,46,.3);background:#FFF8F9}.admin-actions .admin-btn{flex:1}
+
+  .admin-dashboard{display:flex;flex-direction:column;height:min(90vh,860px)}
+  .admin-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 19px;background:linear-gradient(135deg,var(--os-green),#274C3D);color:#fff}.admin-head-main{display:flex;align-items:center;gap:11px;min-width:0}.admin-head-icon{width:39px;height:39px;border-radius:12px;background:rgba(255,255,255,.13);display:grid;place-items:center;font-size:18px}.admin-head h2{margin:0;font:800 20px/1.05 'Archivo Narrow',sans-serif}.admin-head p{margin:3px 0 0;font-size:11.5px;color:rgba(255,255,255,.7)}.admin-head-actions{display:flex;gap:7px}.admin-icon-btn{width:36px;height:36px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:17px}.admin-icon-btn:hover{background:rgba(255,255,255,.17)}
+  .admin-connection{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:#D8EFE5}.admin-dot{width:7px;height:7px;border-radius:50%;background:#5EE19A;box-shadow:0 0 0 4px rgba(94,225,154,.13)}.admin-dot.off{background:#FF8B83;box-shadow:0 0 0 4px rgba(255,139,131,.13)}
+  .admin-body{overflow:auto;flex:1;padding:16px 18px 20px;background:#F5F2E9}.admin-metrics{display:grid;grid-template-columns:repeat(6,minmax(115px,1fr));gap:10px}.admin-metric{position:relative;overflow:hidden;background:#fff;border:1px solid #DED8C8;border-radius:14px;padding:13px;box-shadow:0 3px 12px rgba(27,58,47,.04)}.admin-metric:after{content:"";position:absolute;right:-18px;bottom:-20px;width:60px;height:60px;border-radius:50%;background:rgba(27,58,47,.05)}.admin-metric .value{font:800 25px/1 'Archivo Narrow',sans-serif;color:var(--os-green)}.admin-metric .label{margin-top:6px;font-size:10px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);font-weight:700}.admin-metric.online .value{color:#137A48}.admin-metric.online:before{content:"";display:inline-block;width:7px;height:7px;background:#22B66A;border-radius:50%;margin-right:6px;vertical-align:3px;box-shadow:0 0 0 4px rgba(34,182,106,.1)}
+  .admin-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.65fr);gap:12px;margin-top:12px}.admin-panel{background:#fff;border:1px solid #DED8C8;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(27,58,47,.04)}.admin-panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #E5DFD1}.admin-panel-head h3{margin:0;font:800 15px 'Archivo Narrow',sans-serif;color:var(--os-green)}.admin-panel-head span{font-size:10.5px;color:var(--muted)}
+  .admin-bars{padding:14px;display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:190px}.admin-bar-col{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}.admin-bar{width:min(32px,76%);min-height:3px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--route-blue),var(--os-green));position:relative}.admin-bar:hover:after{content:attr(data-value);position:absolute;left:50%;bottom:calc(100% + 5px);transform:translateX(-50%);background:var(--ink);color:#fff;padding:3px 6px;border-radius:5px;font-size:10px}.admin-bar-label{font-size:9.5px;color:var(--muted)}
+  .admin-list{padding:6px 14px 12px}.admin-list-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:9px 0;border-bottom:1px solid #EEE9DE;font-size:12px}.admin-list-row:last-child{border-bottom:0}.admin-list-row b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.admin-list-row span{color:var(--muted);font-variant-numeric:tabular-nums}
+  .admin-toolbar{display:grid;grid-template-columns:minmax(180px,1fr) 150px auto auto auto;gap:8px;margin:12px 0}.admin-toolbar .admin-input,.admin-toolbar .admin-select{min-height:40px;font-size:12px}
+  .admin-table-panel{background:#fff;border:1px solid #DED8C8;border-radius:14px;overflow:hidden}.admin-table-wrap{overflow:auto;max-height:340px}.admin-table{width:100%;border-collapse:collapse;font-size:11.5px}.admin-table th{position:sticky;top:0;z-index:2;text-align:left;background:#EFEBDD;color:#615B4F;text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;padding:9px 10px;border-bottom:1px solid #D8D1BF;white-space:nowrap}.admin-table td{padding:9px 10px;border-bottom:1px solid #EEE9DE;vertical-align:top;white-space:nowrap}.admin-table tbody tr:hover{background:#FAF8F2}.admin-table .muted{color:var(--muted)}.admin-empty,.admin-loading{text-align:center;padding:45px 18px;color:var(--muted);font-size:13px}.admin-badge{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;background:rgba(27,58,47,.08);color:var(--os-green);font-size:10px;font-weight:700}
+  .admin-settings{padding:14px}.admin-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.admin-settings .admin-note{margin:4px 0 12px}.admin-toast{position:fixed;left:50%;bottom:22px;z-index:1200;transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#17231E;color:#fff;padding:10px 15px;border-radius:999px;font-size:12px;font-weight:700;box-shadow:0 12px 35px rgba(0,0,0,.3);transition:.22s}.admin-toast.show{opacity:1;transform:translate(-50%,0)}
+  @media(max-width:900px){.admin-metrics{grid-template-columns:repeat(3,1fr)}.admin-grid{grid-template-columns:1fr}.admin-toolbar{grid-template-columns:1fr 1fr 1fr}.admin-toolbar .admin-search{grid-column:1/-1}}
+  @media(max-width:620px){.admin-overlay{padding:0;align-items:flex-end}.admin-shell{max-height:96vh;border-radius:20px 20px 0 0}.admin-login{border-radius:20px 20px 0 0;padding:22px 18px}.admin-dashboard{height:96vh}.admin-head{padding:13px}.admin-head p,.admin-connection{display:none}.admin-body{padding:11px}.admin-metrics{grid-template-columns:repeat(2,1fr)}.admin-toolbar{grid-template-columns:1fr 1fr}.admin-toolbar .admin-search{grid-column:1/-1}.admin-toolbar .admin-btn{font-size:0}.admin-toolbar .admin-btn:before{font-size:15px}.admin-btn.refresh:before{content:"↻"}.admin-btn.export:before{content:"↓"}.admin-btn.settings:before{content:"⚙"}.admin-table-wrap{max-height:390px}.admin-settings-grid{grid-template-columns:1fr}}
+
+  .admin-btn.refresh-live{background:var(--route-blue);border-color:var(--route-blue);color:#fff}
+
+  .admin-secondary-link{width:100%;margin-top:10px;border:0;background:transparent;color:var(--route-blue);font:700 12px 'Inter',sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:7px;border-radius:8px}
+  .admin-secondary-link:hover{background:rgba(26,95,180,.07)}
+  .admin-recovery{width:min(720px,100%);padding:24px;background:#FCFBF7;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.5)}
+  .admin-recovery-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .admin-sql-output{width:100%;min-height:220px;max-height:38vh;resize:vertical;border:1px solid #C8C0AC;border-radius:10px;background:#17231E;color:#E9F5EF;padding:12px;font:500 11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;outline:none}
+  .admin-recovery-steps{margin:10px 0 14px;padding-left:20px;color:var(--muted);font-size:12px;line-height:1.55}
+  .admin-recovery-steps b{color:var(--ink)}
+  @media(max-width:620px){.admin-recovery{border-radius:20px 20px 0 0;padding:20px 16px}.admin-recovery-grid{grid-template-columns:1fr}.admin-sql-output{min-height:180px}}
+
+
+  /* ---- Professional bilingual help guide ---- */
+  .header-actions{display:flex;align-items:center;gap:9px;flex-shrink:0}
+  .help-launch-btn{
+    position:relative;display:inline-flex;align-items:center;gap:8px;min-height:38px;
+    padding:7px 11px 7px 8px;border:1px solid rgba(26,95,180,.28);border-radius:999px;
+    background:linear-gradient(145deg,#fff,#F4F8FD);color:var(--route-blue);cursor:pointer;
+    font:800 11.5px/1 'Inter',sans-serif;letter-spacing:.01em;
+    box-shadow:0 5px 16px rgba(26,95,180,.12);transition:transform .16s ease,box-shadow .16s ease,background .16s ease;
+  }
+  .help-launch-btn:hover{transform:translateY(-1px);background:#fff;box-shadow:0 8px 22px rgba(26,95,180,.2)}
+  .help-launch-btn:active{transform:scale(.97)}
+  .help-launch-icon{width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:var(--route-blue);color:#fff;box-shadow:0 0 0 4px rgba(26,95,180,.09)}
+  .help-launch-icon svg{width:15px;height:15px}
+  .help-launch-text{display:flex;align-items:center;gap:5px;white-space:nowrap}
+  .help-launch-text b{color:var(--os-green)}
+  .help-launch-sep{opacity:.38}
+  .help-pulse{position:absolute;right:1px;top:0;width:8px;height:8px;border-radius:50%;background:var(--postbox-red);box-shadow:0 0 0 4px rgba(200,16,46,.1)}
+
+  .help-overlay{position:fixed;inset:0;z-index:1300;display:grid;place-items:center;padding:18px;background:rgba(12,24,19,.7);backdrop-filter:blur(10px)}
+  .help-overlay[hidden]{display:none}
+  .help-dialog{width:min(920px,100%);max-height:min(91vh,860px);overflow:auto;background:#FCFBF7;border:1px solid rgba(255,255,255,.45);border-radius:22px;box-shadow:0 34px 95px rgba(0,0,0,.4)}
+  .help-dialog-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;background:linear-gradient(135deg,var(--os-green),#295240);color:#fff;border-radius:22px 22px 0 0}
+  .help-dialog-title{display:flex;align-items:center;gap:11px}.help-dialog-title-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.14)}
+  .help-dialog-title h2{margin:0;font:800 20px/1.1 'Archivo Narrow',sans-serif}.help-dialog-title p{margin:3px 0 0;color:rgba(255,255,255,.72);font-size:11.5px}
+  .help-close-btn{width:37px;height:37px;border:1px solid rgba(255,255,255,.2);border-radius:11px;background:rgba(255,255,255,.09);color:#fff;font-size:22px;line-height:1;cursor:pointer}.help-close-btn:hover{background:rgba(255,255,255,.18)}
+  .help-content{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px;background:#F4F1E8}
+  .help-language{background:#fff;border:1px solid #DED8C8;border-radius:16px;padding:16px;box-shadow:0 4px 14px rgba(27,58,47,.045)}
+  .help-language.fa{direction:rtl;text-align:right;font-family:Tahoma,'Inter',sans-serif}
+  .help-lang-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px;padding-bottom:11px;border-bottom:1px solid #EAE5D9}
+  .help-lang-head h3{margin:0;color:var(--os-green);font:800 17px 'Archivo Narrow',sans-serif}.help-language.fa .help-lang-head h3{font-family:Tahoma,'Inter',sans-serif;font-size:15px}
+  .help-lang-badge{padding:4px 8px;border-radius:999px;background:rgba(26,95,180,.08);color:var(--route-blue);font-size:10px;font-weight:800}
+  .help-step{display:grid;grid-template-columns:39px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid #F0ECE2}.help-step:last-of-type{border-bottom:0}
+  .help-language.fa .help-step{grid-template-columns:39px minmax(0,1fr)}
+  .help-step-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(145deg,rgba(26,95,180,.12),rgba(27,58,47,.09));color:var(--route-blue)}
+  .help-step-icon svg{width:19px;height:19px}
+
+  /* Exact Postcode location-button preview used inside Help */
+  .help-locate-demo-wrap{
+    width:39px;
+    min-width:39px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:visible;
+  }
+  .locate-btn.help-locate-demo{
+    position:relative;
+    right:auto;
+    top:auto;
+    transform:none;
+    flex:0 0 34px;
+    pointer-events:none;
+    cursor:default;
+    /* Match the visible blue Postcode control exactly. */
+    background:var(--route-blue);
+    color:#fff;
+    border-color:var(--route-blue);
+    box-shadow:0 0 0 4px rgba(26,95,180,.14),0 5px 14px rgba(26,95,180,.28);
+  }
+  .locate-btn.help-locate-demo::before{
+    border-color:rgba(26,95,180,.28);
+  }
+  .locate-btn.help-locate-demo::after{
+    border-top-color:#fff;
+    border-right-color:rgba(255,255,255,.45);
+  }
+  .locate-btn.help-locate-demo:hover,
+  .locate-btn.help-locate-demo:active{
+    transform:none;
+  }
+  .help-step h4{margin:0 0 4px;color:var(--ink);font-size:13px}.help-step p{margin:0;color:var(--muted);font-size:11.8px;line-height:1.62}
+  .help-key{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid rgba(26,95,180,.25);border-radius:999px;background:rgba(26,95,180,.06);color:var(--route-blue);font-size:10.5px;font-weight:800;white-space:nowrap}
+  .help-example{margin-top:12px;padding:11px 12px;border-radius:11px;background:rgba(27,58,47,.055);border:1px solid rgba(27,58,47,.11);color:#554F43;font-size:11.5px;line-height:1.55}
+  .help-example b{color:var(--os-green)}
+  .help-footer-note{grid-column:1/-1;display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:12px;background:#FFF8E8;border:1px solid #E7D39B;color:#6F5B26;font-size:11.5px;line-height:1.5}
+  .help-footer-note svg{flex:0 0 auto;color:#A57800}
+  @media(max-width:720px){
+    .header-actions{gap:6px}.help-launch-btn{padding:6px 8px}.help-launch-text .full-label{display:none}.help-launch-text{font-size:10px}.help-content{grid-template-columns:1fr;padding:10px}.help-footer-note{grid-column:auto}.help-dialog{max-height:96vh;border-radius:20px 20px 0 0}.help-overlay{align-items:end;padding:0}.help-dialog-head{border-radius:20px 20px 0 0}.help-language{padding:13px}
+  }
+  @media(max-width:410px){.gb-tab{display:none}.help-launch-btn{min-height:36px}.help-launch-icon{width:23px;height:23px}}
+
+  /* ---- Admin: delete stored records ---- */
+  .admin-panel-head-actions{display:flex;align-items:center;gap:9px}
+  .admin-btn.small{min-height:31px;padding:5px 11px;font-size:11px}
+  .admin-confirm{width:min(420px,100%);padding:24px;background:linear-gradient(145deg,#FFFEFA,#F3EFE4);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.5)}
+  .admin-confirm .admin-brand-icon{background:var(--postbox-red)}
+  .admin-confirm-body{font-size:12.5px;line-height:1.6;color:var(--muted);margin:2px 0 14px}
+  .admin-confirm-body b{color:var(--ink)}
+
+  /* ---- Feedback: launch button ---- */
+  .feedback-launch-btn{
+    position:relative;display:inline-flex;align-items:center;gap:8px;min-height:38px;
+    padding:7px 13px 7px 10px;border:1px solid rgba(200,16,46,.28);border-radius:999px;
+    background:linear-gradient(145deg,#fff,#FDF4F5);color:var(--postbox-red);cursor:pointer;
+    font:800 11.5px/1 'Inter',sans-serif;letter-spacing:.01em;
+    box-shadow:0 5px 16px rgba(200,16,46,.12);transition:transform .16s ease,box-shadow .16s ease,background .16s ease;
+  }
+  .feedback-launch-btn:hover{transform:translateY(-1px);background:#fff;box-shadow:0 8px 22px rgba(200,16,46,.2)}
+  .feedback-launch-btn:active{transform:scale(.97)}
+  .feedback-launch-btn svg{flex:0 0 auto}
+  .feedback-launch-sep{opacity:.35;margin:0 3px;font-weight:400}
+
+  /* ---- Feedback: modal dialog ---- */
+  .feedback-overlay{position:fixed;inset:0;z-index:1050;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(15,22,19,.68);backdrop-filter:blur(10px)}
+  .feedback-overlay[hidden]{display:none}
+  .feedback-dialog{position:relative;width:min(440px,100%);max-height:88vh;overflow:auto;padding:20px 22px 18px;background:linear-gradient(160deg,#FFFEFA,#F6F1E4);border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.5)}
+  .feedback-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;border:1px solid #DED8C8;background:#fff;color:var(--ink);font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .feedback-close:hover{background:#F3EFE4;transform:rotate(90deg)}
+  .feedback-head{text-align:center;margin-bottom:10px}
+  .feedback-badge{width:38px;height:38px;margin:0 auto 7px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;background:linear-gradient(135deg,var(--postbox-red),#9c0c22);box-shadow:0 8px 18px rgba(200,16,46,.3)}
+  .feedback-head h2{margin:0 0 3px;font:800 16.5px 'Archivo Narrow',sans-serif;color:var(--os-green)}
+  .feedback-head p{margin:0;font-size:11px;color:var(--muted);line-height:1.4}
+  .feedback-field{margin-bottom:9px}
+  .feedback-field label{display:block;font:700 11px 'Inter',sans-serif;color:var(--ink);margin-bottom:3px}
+  .feedback-field .req{color:var(--postbox-red)}
+  .feedback-field .opt{color:var(--muted);font-weight:500;font-size:9.5px;text-transform:none}
+  .feedback-field input,.feedback-field textarea{width:100%;border:1px solid #C8C0AC;border-radius:9px;background:#fff;color:var(--ink);padding:7px 10px;font:500 13px 'Inter',sans-serif;outline:none;resize:vertical;transition:.15s}
+  .feedback-field input:focus,.feedback-field textarea:focus{border-color:var(--route-blue);box-shadow:0 0 0 4px rgba(26,95,180,.13)}
+  .feedback-field input.invalid,.feedback-field textarea.invalid{border-color:var(--postbox-red);box-shadow:0 0 0 4px rgba(200,16,46,.1)}
+  .feedback-count{display:block;text-align:right;font-size:9.5px;color:var(--muted);margin-top:2px}
+  .feedback-error{min-height:14px;color:var(--postbox-red);font-size:11px;font-weight:600;margin:2px 0 8px}
+  .feedback-submit{width:100%;min-height:40px;border:0;border-radius:11px;background:linear-gradient(135deg,var(--os-green),var(--os-green-light));color:#fff;font:800 13px 'Inter',sans-serif;cursor:pointer;box-shadow:0 10px 22px rgba(27,58,47,.22);transition:.16s}
+  .feedback-submit:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(27,58,47,.28)}
+  .feedback-submit:disabled{opacity:.6;cursor:wait;transform:none}
+  .feedback-success{text-align:center;padding:4px 4px 2px}
+  .feedback-success-icon{width:46px;height:46px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(135deg,var(--os-green),var(--os-green-light));color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:800;box-shadow:0 10px 22px rgba(27,58,47,.25)}
+  .feedback-success h3{margin:0 0 5px;font:800 16px 'Archivo Narrow',sans-serif;color:var(--os-green)}
+  .feedback-success p{margin:0 0 14px;font-size:11.5px;color:var(--muted);line-height:1.5}
+  @media(max-width:520px){.feedback-overlay{align-items:flex-end;padding:0}.feedback-dialog{border-radius:20px 20px 0 0;max-height:94vh}.feedback-launch-text{display:none}.feedback-launch-btn{padding:8px;min-height:36px}}
+
+
+  /* ---- Admin feedback view and row actions ---- */
+  .admin-feedback-section[hidden]{display:none}
+  .admin-feedback-message{max-width:420px;min-width:240px;white-space:normal!important;line-height:1.45;overflow-wrap:anywhere}
+  .admin-row-actions{display:flex;gap:6px;align-items:center;white-space:nowrap}
+  .admin-row-btn{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:5px 9px;border-radius:7px;border:1px solid #C8C0AC;background:#fff;color:var(--ink);font:700 10.5px 'Inter',sans-serif;cursor:pointer;text-decoration:none}
+  .admin-row-btn:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(27,58,47,.1)}
+  .admin-row-btn.reply{color:var(--route-blue);border-color:rgba(26,95,180,.32);background:#F7FAFF}
+  .admin-row-btn.delete{color:var(--postbox-red);border-color:rgba(200,16,46,.3);background:#FFF8F9}
+  .admin-btn.feedback-view.active{background:var(--postbox-red);border-color:var(--postbox-red);color:#fff}
+
+
+</style>
+</head>
+<body>
+<main class="app">
+<header class="topbar"><div class="brand"><div class="logo">JS</div><div><h1>JobScout AI UK</h1><div class="subtitle">Intelligent, location-aware job discovery across the UK</div></div></div><div class="header-actions">
+      <button type="button" class="help-launch-btn" id="helpLaunchBtn" aria-haspopup="dialog" aria-controls="helpOverlay" title="Help and guide | راهنما">
+        <span class="help-launch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M9.8 9a2.35 2.35 0 114.1 1.57c-.75.75-1.9 1.17-1.9 2.43" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg></span>
+        <span class="help-launch-text"><b class="full-label">Help</b><span class="help-launch-sep">|</span><b>راهنما</b><span class="help-launch-sep">EN/FA</span></span>
+        <span class="help-pulse" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="feedback-launch-btn" id="feedbackLaunchBtn" aria-haspopup="dialog" aria-controls="feedbackOverlay" title="Send feedback | ارسال نظر">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V4H6.5A2.5 2.5 0 004 6.5v13z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 8h8M8 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="feedback-launch-text"><b>Feedback</b><span class="feedback-launch-sep">|</span><b>نظر شما</b></span>
+      </button>
+      <div class="gb-tab">UK ONLY</div>
+    </div></header>
+<section class="hero"><article class="panel intro"><div class="eyebrow">Personal job discovery engine</div><h2>One profile. Every relevant opportunity.</h2><p>Tell JobScout what you want, where you can travel and what you expect to earn. It analyses your optional CV, expands related job titles, searches approved job feeds and employer career pages, removes duplicates and ranks the best matches.</p></article><aside class="panel trust"><h3>Privacy by design</h3><div class="trust-row"><span class="tick">✓</span><span>Your CV (PDF, DOCX or TXT) is parsed entirely in your browser — the file itself never leaves this device.</span></div><div class="trust-row"><span class="tick">✓</span><span>Your profile and CV text are saved locally in this browser so you don't have to retype them next time.</span></div><div class="trust-row"><span class="tick">✓</span><span>No automatic application is made without approval. You can clear saved data any time.</span></div></aside></section>
+<section id="profileBar" class="panel profile-bar" hidden><div class="profile-bar-text"><b id="profileBarTitle">Saved profile found on this device</b><span id="profileBarMeta"></span></div><div class="profile-bar-actions"><button type="button" id="btnDismissBar" class="secondary small">Dismiss</button></div></section>
+<section class="panel form-panel">
+<div class="section-head"><h3>Build your search profile</h3><span>* Required information</span></div>
+<form id="searchForm">
+<div class="grid">
+<div class="field wide"><label for="role">Target job *</label><div class="role-combobox"><input id="role" class="control" required autocomplete="off" aria-autocomplete="list" aria-controls="roleSuggestions" aria-expanded="false" placeholder="e.g. Care Assistant, Data Analyst, IT Support" /><ul id="roleSuggestions" class="role-suggestions" role="listbox" hidden></ul></div><div class="role-help">Type a job title, use ↑/↓ to move, then press Tab or Enter to select.</div></div>
+<div class="field wide"><label for="address">Home address or UK postcode *</label><input id="address" class="control uppercase-input" required autocomplete="street-address" autocapitalize="characters" spellcheck="false" placeholder="e.g. SW1A 1AA or MANCHESTER" /></div>
+<div class="field"><label for="radius">Search radius *</label><select id="radius" class="control"><option value="5">5 miles</option><option value="10">10 miles</option><option value="15" selected>15 miles</option><option value="25">25 miles</option><option value="50">50 miles</option><option value="100">100 miles</option><option value="0">Remote / anywhere</option></select></div>
+<div class="field"><label for="salary">Minimum salary <span class="optional">(optional)</span></label><input id="salary" class="control" type="number" min="0" step="1000" placeholder="e.g. 30000" /></div>
+<div class="field"><label for="workType">Work type *</label><select id="workType" class="control"><option>Any</option><option>Permanent</option><option>Contract</option><option>Temporary</option><option>Part-time</option><option>Apprenticeship</option><option>Internship</option><option>Volunteer</option></select></div>
+<div class="field"><label for="workMode">Work mode</label><select id="workMode" class="control"><option>Any</option><option>On-site</option><option>Hybrid</option><option>Remote</option></select></div>
+<div class="field full"><label for="skills">Skills or preferences <span class="optional">(optional)</span></label><textarea id="skills" class="control" placeholder="e.g. Excel, customer service, NHS experience, no night shifts, visa sponsorship"></textarea></div>
+<div class="field full"><label>CV <span class="optional">(optional — PDF, DOCX and TXT are all extracted locally in your browser)</span></label><div class="filebox"><input id="cv" type="file" accept=".pdf,.txt,.doc,.docx" /><div id="cvNote" class="file-note">No CV selected. PDF, DOCX and TXT are read and analysed entirely on this device.</div></div></div>
+<div class="field full"><label class="consent"><input id="consent" type="checkbox" required /><span>I agree that my search information may be used to find and rank vacancies. I understand that external job sites have their own privacy policies.</span></label></div>
+</div>
+<div class="actions"><button class="primary" type="submit">Find my best jobs</button><button class="secondary" type="reset">Clear form</button><span id="status" class="status">Ready to search</span></div>
+<div class="data-panel"><span id="storageNote"><b>On-device profile:</b> nothing saved yet. Your profile and CV text will be stored locally in this browser once you start typing.</span><div class="actions2"><button type="button" id="btnForget" class="secondary small danger">Forget saved profile &amp; CV</button></div></div>
+</form>
+</section>
+<section id="results" class="panel results-wrap" hidden>
+<div class="results-head"><h3>Job discovery workspace</h3><small id="resultLabel"></small></div>
+<div id="sourceGrid" class="source-grid"></div>
+<div id="aiSummary" class="ai-summary"></div>
+<div id="jobList" class="job-list"></div>
+</section>
+<section class="panel architecture"><h3>Production data architecture</h3><div class="flow"><div class="step"><b>1. User profile</b>Validated inputs, consent, encrypted CV storage and retention controls.</div><div class="step"><b>2. Job connectors</b>Official feeds, partner APIs, RSS, ATS feeds and organisation career pages.</div><div class="step"><b>3. Normalisation</b>Standardise title, salary, location, contract, skills and closing date.</div><div class="step"><b>4. AI matching</b>Skill extraction, title expansion, distance scoring, salary fit and duplicate removal.</div><div class="step"><b>5. Alerts</b>Saved searches, email notifications, application tracker and feedback learning.</div></div><div class="warning"><b>Important:</b> LinkedIn and Indeed do not provide an unrestricted public job-search API for arbitrary third-party apps. A production version must use approved partnerships, licensed aggregators, permitted feeds or outbound search links. Scraping everything blindly is fragile, legally risky and a splendid way to build a product that stops working on Tuesday.</div></section>
+<footer>
+<div class="business-card">
+<strong>Prepared by Dr Mortaza Arokhlo</strong><br>
+<a class="email" href="mailto:arokhlo687@gmail.com">✉ arokhlo687@gmail.com</a><br>
+<div class="offer">
+Helping local businesses grow with free website design, flyer design and custom digital tools.
+</div>
+</div>
+</footer>
+</main>
+<button type="button" class="admin-trigger" id="adminTrigger" aria-label="Open administration" title="Administration">Ad<span class="admin-taps" id="adminTapCount"></span></button>
+
+<div class="admin-overlay" id="adminLoginOverlay" hidden>
+  <section class="admin-login" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
+    <div class="admin-brand"><div class="admin-brand-icon">⌁</div><div><h2 id="adminLoginTitle">JobScout AI UK Admin</h2><p>Private visitor analytics powered by Supabase</p></div></div>
+    <div class="admin-field"><label for="adminKeyInput">Admin password</label><div class="admin-input-wrap"><input class="admin-input" type="password" id="adminKeyInput" placeholder="Enter your admin password" autocomplete="current-password"><button class="admin-password-toggle" id="adminPasswordToggle" type="button" aria-label="Show password">Show</button></div></div>
+    <label class="admin-check"><input type="checkbox" id="adminRememberKey"> Remember this password on this device</label>
+    <div class="admin-error" id="adminLoginError" aria-live="polite"></div>
+    <div class="admin-actions"><button type="button" class="admin-btn" id="adminLoginCancel">Cancel</button><button type="button" class="admin-btn primary" id="adminLoginSubmit">Unlock dashboard</button></div>
+    <button type="button" class="admin-secondary-link" id="adminForgotPassword">Set or forgot admin password</button>
+    <div class="admin-note">The password is converted to a SHA-256 hash before it is sent. The plain password is never written to Supabase. Browser storage is optional and should only be used on your own device.</div>
+  </section>
+</div>
+
+<div class="admin-overlay" id="adminDashOverlay" hidden>
+  <section class="admin-shell admin-dashboard" role="dialog" aria-modal="true" aria-labelledby="adminDashTitle">
+    <header class="admin-head"><div class="admin-head-main"><div class="admin-head-icon">⌁</div><div><h2 id="adminDashTitle">JobScout AI UK Analytics</h2><p><span class="admin-connection"><i class="admin-dot" id="adminConnectionDot"></i><span id="adminConnectionText">Supabase connected</span></span> · privacy-friendly session statistics</p></div></div><div class="admin-head-actions"><button type="button" class="admin-btn refresh-live" id="adminReloadBtn" title="Reload analytics">⟳ Refresh</button><button class="admin-icon-btn" id="adminDashClose" type="button" aria-label="Close dashboard">×</button></div></header>
+    <div class="admin-body">
+      <section class="admin-metrics" id="adminStatsGrid"></section>
+      <section class="admin-grid">
+        <article class="admin-panel"><div class="admin-panel-head"><h3>Visits during the last 7 days</h3><span id="adminChartTotal">0 sessions</span></div><div class="admin-bars" id="adminBars"></div></article>
+        <article class="admin-panel"><div class="admin-panel-head"><h3>Popular searches</h3><span>Top 6</span></div><div class="admin-list" id="adminPopularList"></div></article>
+      </section>
+      <div class="admin-toolbar">
+        <input class="admin-input admin-search" type="search" id="adminSearchBox" placeholder="Search postcode, query, city, browser…">
+        <select class="admin-select" id="adminRangeSelect"><option value="1">Last 24 hours</option><option value="7" selected>Last 7 days</option><option value="30">Last 30 days</option><option value="0">All time</option></select>
+        <button type="button" class="admin-btn refresh" id="adminRefreshBtn">↻ Refresh</button>
+        <button type="button" class="admin-btn export" id="adminExportBtn">↓ Export CSV</button>
+        <button type="button" class="admin-btn feedback-view" id="adminViewFeedbackBtn">✉ View feedback</button>
+        <button type="button" class="admin-btn settings" id="adminSettingsBtn">⚙ Password</button>
+      </div>
+      <section class="admin-table-panel"><div class="admin-panel-head"><h3>Visitor activity</h3><div class="admin-panel-head-actions"><span id="adminTableCount">0 records</span><button type="button" class="admin-btn danger small" id="adminClearActivityBtn" title="Delete stored visitor activity">🗑 Delete records</button></div></div><div class="admin-table-wrap" id="adminTableWrap"><div class="admin-loading">Loading analytics…</div></div></section>
+      <section class="admin-table-panel admin-feedback-section" id="adminFeedbackSection" hidden><div class="admin-panel-head"><h3>View feedback</h3><div class="admin-panel-head-actions"><span id="adminFeedbackCount">0 records</span><button type="button" class="admin-btn danger small" id="adminClearFeedbackBtn" title="Delete stored feedback messages">🗑 Delete records</button></div></div><div class="admin-table-wrap" id="adminFeedbackWrap"><div class="admin-loading">Loading feedback…</div></div></section>
+    </div>
+  </section>
+</div>
+
+<div class="admin-overlay" id="adminSettingsOverlay" hidden>
+  <section class="admin-login admin-settings" role="dialog" aria-modal="true" aria-labelledby="adminSettingsTitle">
+    <div class="admin-brand"><div class="admin-brand-icon">⚙</div><div><h2 id="adminSettingsTitle">Change admin password</h2><p>Save a new password securely as a hash in Supabase</p></div></div>
+    <div class="admin-note">Use at least 10 characters. A long passphrase is better than a short, theatrical collection of symbols.</div>
+    <div class="admin-settings-grid"><div class="admin-field"><label for="adminCurrentKey">Current password</label><input class="admin-input" type="password" id="adminCurrentKey" autocomplete="current-password"></div><div class="admin-field"><label for="adminNewKey">New password</label><input class="admin-input" type="password" id="adminNewKey" autocomplete="new-password"></div></div>
+    <div class="admin-field"><label for="adminConfirmKey">Confirm new password</label><input class="admin-input" type="password" id="adminConfirmKey" autocomplete="new-password"></div>
+    <div class="admin-error" id="adminSettingsError" aria-live="polite"></div>
+    <div class="admin-actions"><button type="button" class="admin-btn" id="adminSettingsCancel">Cancel</button><button type="button" class="admin-btn primary" id="adminSavePassword">Save password</button></div>
+  </section>
+</div>
+
+<div class="admin-overlay" id="adminRecoveryOverlay" hidden>
+  <section class="admin-recovery" role="dialog" aria-modal="true" aria-labelledby="adminRecoveryTitle">
+    <div class="admin-brand"><div class="admin-brand-icon">⌘</div><div><h2 id="adminRecoveryTitle">Set or reset admin password</h2><p>The complete Supabase setup is built into this HTML file</p></div></div>
+    <div class="admin-note">For security, a public page cannot create database tables or functions using an anon key. Generate the SQL here, then run it once in your own Supabase SQL Editor.</div>
+    <ol class="admin-recovery-steps"><li>Enter and confirm a new password.</li><li>Select <b>Generate setup / reset SQL</b>.</li><li>Copy the SQL and run it in <b>Supabase → SQL Editor</b>.</li><li>Return here and sign in using the new password.</li></ol>
+    <div class="admin-recovery-grid">
+      <div class="admin-field"><label for="adminRecoveryPassword">New admin password</label><input class="admin-input" type="password" id="adminRecoveryPassword" autocomplete="new-password" minlength="10"></div>
+      <div class="admin-field"><label for="adminRecoveryConfirm">Confirm password</label><input class="admin-input" type="password" id="adminRecoveryConfirm" autocomplete="new-password" minlength="10"></div>
+    </div>
+    <div class="admin-error" id="adminRecoveryError" aria-live="polite"></div>
+    <textarea class="admin-sql-output" id="adminSqlOutput" readonly hidden aria-label="Generated Supabase SQL"></textarea>
+    <div class="admin-actions" style="margin-top:12px">
+      <button type="button" class="admin-btn" id="adminRecoveryCancel">Back</button>
+      <button type="button" class="admin-btn primary" id="adminGenerateSql">Generate setup / reset SQL</button>
+      <button type="button" class="admin-btn" id="adminCopySql" hidden>Copy SQL</button>
+    </div>
+  </section>
+</div>
+
+<div class="admin-overlay" id="adminClearOverlay" hidden>
+  <section class="admin-confirm" role="dialog" aria-modal="true" aria-labelledby="adminClearTitle">
+    <div class="admin-brand"><div class="admin-brand-icon">🗑</div><div><h2 id="adminClearTitle">Delete stored records</h2></div></div>
+    <p class="admin-confirm-body" id="adminClearBody">This will permanently delete records from Supabase. This cannot be undone.</p>
+    <div class="admin-field"><label for="adminClearRange">Range to delete</label><select class="admin-select" id="adminClearRange"><option value="0">All stored records</option><option value="90">Older than 90 days</option><option value="30">Older than 30 days</option><option value="7">Older than 7 days</option><option value="2">Older than 2 days</option></select></div>
+    <div class="admin-error" id="adminClearError" aria-live="polite"></div>
+    <div class="admin-actions"><button type="button" class="admin-btn" id="adminClearCancel">Cancel</button><button type="button" class="admin-btn danger" id="adminClearConfirm">Delete records</button></div>
+  </section>
+</div>
+
+<div class="admin-toast" id="adminToast" aria-live="polite"></div>
+
+
+<div class="feedback-overlay" id="feedbackOverlay" hidden>
+  <section class="feedback-dialog" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+    <button type="button" class="feedback-close" id="feedbackClose" aria-label="Close">×</button>
+    <div id="feedbackFormView">
+      <div class="feedback-head">
+        <div class="feedback-badge">✉</div>
+        <h2 id="feedbackTitle">We'd love your feedback</h2>
+        <p>Help us improve JobScout AI UK.<br>نظرات و پیشنهادات شما به بهتر شدن این سرویس کمک می‌کند.</p>
+      </div>
+      <form id="feedbackForm" novalidate>
+        <div class="feedback-field">
+          <label for="fbName">Full name <span class="req">*</span></label>
+          <input type="text" id="fbName" name="name" maxlength="60" required placeholder="Your name" autocomplete="name">
+          <span class="feedback-count" id="fbNameCount">0 / 60</span>
+        </div>
+        <div class="feedback-field">
+          <label for="fbEmail">Email <span class="req">*</span></label>
+          <input type="email" id="fbEmail" name="email" maxlength="120" required placeholder="you@example.com" autocomplete="email">
+          <span class="feedback-count" id="fbEmailCount">0 / 120</span>
+        </div>
+        <div class="feedback-field">
+          <label for="fbMobile">Mobile number <span class="opt">(optional)</span></label>
+          <input type="tel" id="fbMobile" name="mobile" maxlength="20" placeholder="07xxx xxxxxx" autocomplete="tel">
+          <span class="feedback-count" id="fbMobileCount">0 / 20</span>
+        </div>
+        <div class="feedback-field">
+          <label for="fbMessage">Your comment or suggestion <span class="opt">(optional)</span></label>
+          <textarea id="fbMessage" name="message" maxlength="500" rows="3" placeholder="Tell us what you think…"></textarea>
+          <span class="feedback-count" id="fbMessageCount">0 / 500</span>
+        </div>
+        <div class="feedback-error" id="feedbackError" aria-live="polite"></div>
+        <button type="submit" class="feedback-submit" id="feedbackSubmit">Send feedback</button>
+      </form>
+    </div>
+    <div class="feedback-success" id="feedbackSuccess" hidden>
+      <div class="feedback-success-icon">✓</div>
+      <h3>Thank you!</h3>
+      <p>Your feedback has been received.<br>از نظر شما سپاسگزاریم.</p>
+      <button type="button" class="admin-btn primary" id="feedbackDone">Close</button>
+    </div>
+  </section>
+</div>
+
+
+
+<div class="help-overlay" id="helpOverlay" role="dialog" aria-modal="true" aria-labelledby="helpDialogTitle" hidden>
+  <div class="help-dialog" tabindex="-1">
+    <div class="help-dialog-head">
+      <div class="help-dialog-title">
+        <span class="help-dialog-title-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V4H6.5A2.5 2.5 0 004 6.5v13z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 8h8M8 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <div><h2 id="helpDialogTitle">Help &amp; Guide | راهنمای استفاده</h2><p>Simple instructions in English and Persian</p></div>
+      </div>
+      <button type="button" class="help-close-btn" id="helpCloseBtn" aria-label="Close guide">×</button>
+    </div>
+    <div class="help-content">
+      <section class="help-language" lang="en-GB">
+        <div class="help-lang-head"><h3>How to use JobScout AI UK</h3><span class="help-lang-badge">ENGLISH</span></div>
+        <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><h4>1. Enter your target job</h4><p>In the <span class="help-key">Target job</span> box, type a job title such as Care Assistant, Data Analyst or IT Support. Suggestions will appear — use ↑/↓ then Tab or Enter to pick one, or keep typing your own title.</p></div></div>
+        <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>2. Add your address or postcode</h4><p>Type your home address or UK postcode in the <span class="help-key">Home address or UK postcode</span> box, then set a search radius, and optionally a minimum salary, work type and work mode.</p></div></div>
+        <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>3. Add skills or a CV, then search</h4><p>Optionally list your skills or attach a CV (PDF, DOCX or TXT) — it is read entirely on your device. Agree to the consent checkbox, then press <span class="help-key">Find my best jobs</span> to see ranked, matching vacancies.</p></div></div>
+        <div class="help-example"><b>Example:</b> Enter <b>Data Analyst</b> as the target job, <b>PR1 2HE</b> as the postcode, a 15-mile radius, then press <b>Find my best jobs</b>.</div>
+      </section>
+
+      <section class="help-language fa" lang="fa">
+        <div class="help-lang-head"><h3>چگونه از JobScout AI UK استفاده کنیم؟</h3><span class="help-lang-badge">فارسی</span></div>
+        <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><h4>۱. نوشتن شغل مورد نظر</h4><p>در کادر <span class="help-key">Target job</span> عنوان شغلی را که به دنبال آن هستید بنویسید؛ مانند Care Assistant، Data Analyst یا IT Support. پیشنهادهایی نمایش داده می‌شود که با کلیدهای ↑/↓ و سپس Tab یا Enter می‌توانید انتخاب کنید، یا عنوان دلخواه خود را کامل بنویسید.</p></div></div>
+        <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>۲. وارد کردن آدرس یا کدپستی</h4><p>آدرس محل سکونت یا کدپستی بریتانیا را در کادر <span class="help-key">Home address or UK postcode</span> بنویسید، سپس شعاع جستجو و در صورت تمایل حداقل حقوق، نوع قرارداد و نحوه کار را مشخص کنید.</p></div></div>
+        <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>۳. افزودن مهارت‌ها یا رزومه و شروع جستجو</h4><p>در صورت تمایل مهارت‌های خود را بنویسید یا رزومه (PDF، DOCX یا TXT) پیوست کنید — این فایل فقط روی دستگاه شما خوانده می‌شود. تیک رضایت را بزنید و سپس روی دکمه <span class="help-key">Find my best jobs</span> بزنید تا فهرست مشاغل مرتبط و رتبه‌بندی‌شده نمایش داده شود.</p></div></div>
+        <div class="help-example"><b>مثال:</b> در کادر شغل <b>Data Analyst</b> و در کادر کدپستی <b>PR1 2HE</b> را وارد کنید، شعاع ۱۵ مایل را انتخاب و سپس <b>Find my best jobs</b> را بزنید.</div>
+      </section>
+      <div class="help-footer-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 8v5M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10.3 3.6L2.7 17a2 2 0 001.74 3h15.12a2 2 0 001.74-3L13.7 3.6a2 2 0 00-3.4 0z" stroke="currentColor" stroke-width="2"/></svg><span><b>Tip | نکته:</b> A clear job title and an accurate postcode give the best matches. برای نتیجه بهتر، عنوان شغلی دقیق و کدپستی صحیح وارد کنید.</span></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let cvText='';
+const roleOptions=[
+ {title:'Care Assistant',note:'Health and social care'},
+ {title:'Data Analyst',note:'Data, reporting and insight'},
+ {title:'Lecturer',note:'Higher education teaching'},
+ {title:'IT Support',note:'Technical support and user assistance'},
+ {title:'IT Support Engineer',note:'Infrastructure and troubleshooting'},
+ {title:'Technical Support Specialist',note:'Advanced product and systems support'},
+ {title:'Software Engineer',note:'Software design and development'},
+ {title:'Data Scientist',note:'Statistics, modelling and machine learning'},
+ {title:'Machine Learning Engineer',note:'Production AI and ML systems'},
+ {title:'Research Scientist — Computer Science',note:'Research role suitable for a Computer Science PhD'},
+ {title:'Research Fellow — Computer Science',note:'University or funded research'},
+ {title:'Lecturer in Computer Science',note:'Academic teaching and research'},
+ {title:'Cyber Security Analyst',note:'Security monitoring and risk analysis'},
+ {title:'Cloud Engineer',note:'Cloud platforms and infrastructure'},
+ {title:'Solutions Architect',note:'Senior technical design and consulting'},
+ {title:'AI Research Engineer',note:'Applied artificial intelligence research'},
+ {title:'Software Developer',note:'Application and systems software development'},
+ {title:'Computer Engineer',note:'Computer systems, hardware and software engineering'},
+ {title:'Computer Vision Engineer',note:'Image processing, vision systems and deep learning'},
+ {title:'Natural Language Processing Engineer',note:'Language models, text analytics and NLP systems'},
+ {title:'Robotics Software Engineer',note:'Software for autonomous and robotic systems'},
+ {title:'Research Software Engineer',note:'Research-focused scientific software development'},
+ {title:'Algorithm Engineer',note:'Advanced algorithms, optimisation and computational methods'},
+ {title:'High Performance Computing Engineer',note:'Parallel computing, clusters and scientific workloads'},
+ {title:'Database Architect',note:'Advanced database design, performance and data platforms'},
+ {title:'Computer Science Consultant',note:'Expert technical consulting and strategic problem solving'}
+];
+const roleInput=$('#role'),roleList=$('#roleSuggestions');let roleActive=-1;
+function visibleRoleOptions(){const q=roleInput.value.trim().toLowerCase();return roleOptions.filter(x=>!q||x.title.toLowerCase().includes(q)||x.note.toLowerCase().includes(q)).slice(0,10)}
+function renderRoleOptions(){const rows=visibleRoleOptions();roleActive=rows.length?0:-1;roleList.innerHTML=rows.map((x,i)=>`<li class="role-option${i===roleActive?' active':''}" role="option" aria-selected="${i===roleActive}" data-index="${i}"><b>${esc(x.title)}</b><small>${esc(x.note)}</small></li>`).join('');roleList.hidden=!rows.length;roleInput.setAttribute('aria-expanded',String(rows.length>0))}
+function setRoleActive(next){const items=[...roleList.querySelectorAll('.role-option')];if(!items.length)return;roleActive=(next+items.length)%items.length;items.forEach((el,i)=>{el.classList.toggle('active',i===roleActive);el.setAttribute('aria-selected',String(i===roleActive))});items[roleActive].scrollIntoView({block:'nearest'})}
+function chooseRole(index=roleActive){const rows=visibleRoleOptions();if(index<0||!rows[index])return false;roleInput.value=rows[index].title;roleList.hidden=true;roleInput.setAttribute('aria-expanded','false');return true}
+roleInput.addEventListener('focus',renderRoleOptions);roleInput.addEventListener('input',renderRoleOptions);
+roleInput.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();if(roleList.hidden)renderRoleOptions();else setRoleActive(roleActive+1)}else if(e.key==='ArrowUp'){e.preventDefault();if(roleList.hidden)renderRoleOptions();else setRoleActive(roleActive-1)}else if(e.key==='Enter'&&!roleList.hidden){e.preventDefault();chooseRole()}else if(e.key==='Tab'&&!roleList.hidden&&visibleRoleOptions().length){chooseRole()}else if(e.key==='Escape'){roleList.hidden=true;roleInput.setAttribute('aria-expanded','false')}});
+roleList.addEventListener('mousedown',e=>{const item=e.target.closest('.role-option');if(!item)return;e.preventDefault();chooseRole(Number(item.dataset.index));roleInput.focus()});
+document.addEventListener('click',e=>{if(!e.target.closest('.role-combobox')){roleList.hidden=true;roleInput.setAttribute('aria-expanded','false')}});
+
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+async function extractPdfText(file){const buf=await file.arrayBuffer();const doc=await pdfjsLib.getDocument({data:buf}).promise;let out='';const pages=Math.min(doc.numPages,60);for(let i=1;i<=pages;i++){const page=await doc.getPage(i);const content=await page.getTextContent();out+=content.items.map(it=>it.str).join(' ')+'\n'}return out}
+async function extractDocxText(file){const buf=await file.arrayBuffer();const res=await mammoth.extractRawText({arrayBuffer:buf});return res.value||''}
+$('#cv').addEventListener('change',async e=>{const f=e.target.files[0];const note=$('#cvNote');if(!f){cvText='';note.textContent='No CV selected.';saveProfile(null);return}
+if(f.size>8*1024*1024){e.target.value='';note.textContent='CV is too large. Maximum 8 MB.';return}
+const name=f.name.toLowerCase();note.textContent=`Reading ${f.name} locally in your browser…`;
+try{
+ if(f.type==='text/plain'||name.endsWith('.txt')){cvText=(await f.text()).slice(0,60000)}
+ else if(f.type==='application/pdf'||name.endsWith('.pdf')){cvText=(await extractPdfText(f)).slice(0,60000)}
+ else if(name.endsWith('.docx')){cvText=(await extractDocxText(f)).slice(0,60000)}
+ else if(name.endsWith('.doc')){cvText='';note.textContent=`${f.name}: the old .doc format can't be read in-browser. Please save it as .docx or .pdf and re-upload, or paste key skills into the field above.`;saveProfile(null);return}
+ else{cvText='';note.textContent=`${f.name}: unsupported file type.`;saveProfile(null);return}
+ if(cvText.trim().length<20){note.textContent=`${f.name} was read but very little text was found (it may be a scanned/image PDF). Try a text-based export, or add your skills manually above.`}
+ else{note.textContent=`${f.name} analysed locally and saved to this browser (${cvText.length.toLocaleString('en-GB')} characters).`}
+ saveProfile({name:f.name,type:f.type||name.slice(name.lastIndexOf('.')),size:f.size,text:cvText});
+}catch(err){cvText='';note.textContent=`Could not read ${f.name} in this browser (${err&&err.message?err.message:'unknown error'}). Try a different export of your CV.`;saveProfile(null)}
+});
+function queryURL(base,params){const u=new URL(base);Object.entries(params).forEach(([k,v])=>{if(v)u.searchParams.set(k,v)});return u.href}
+function makeSources(role,loc,radius,type){const q=[role,type!=='Any'?type:''].filter(Boolean).join(' ');const miles=radius==='0'?'':radius;return[
+['LinkedIn Jobs','Professional network',queryURL('https://www.linkedin.com/jobs/search/',{keywords:q,location:loc,distance:miles})],
+['Indeed UK','Large UK job board',queryURL('https://uk.indeed.com/jobs',{q, l:loc, radius:miles})],
+['Totaljobs','UK vacancies and agencies',queryURL('https://www.totaljobs.com/jobs/'+encodeURIComponent(role.toLowerCase().replace(/\s+/g,'-')),{radius:miles})],
+['Reed','UK jobs and recruiters',queryURL('https://www.reed.co.uk/jobs/'+encodeURIComponent(role.toLowerCase().replace(/\s+/g,'-'))+'-jobs-in-'+encodeURIComponent(loc.toLowerCase().replace(/\s+/g,'-')),{proximity:miles})],
+['Find a job','UK Government service','https://www.gov.uk/find-a-job'],
+['Civil Service Jobs','Public sector roles','https://www.civilservicejobs.service.gov.uk/csr/index.cgi'],
+['NHS Jobs','Health and care roles',queryURL('https://www.jobs.nhs.uk/candidate/search/results',{keyword:role,location:loc,distance:miles})],
+['jobs.ac.uk','Universities and research',queryURL('https://www.jobs.ac.uk/search/',{keywords:role,location:loc})],
+['Google employer search','Company career pages',queryURL('https://www.google.com/search',{q:`${role} jobs ${loc} (site:jobs.* OR site:careers.* OR inurl:careers)`})],
+['Recruitment agencies','Local agency discovery',queryURL('https://www.google.com/search',{q:`${role} recruitment agencies near ${loc}`})],
+['CharityJob','Charity sector roles',queryURL('https://www.charityjob.co.uk/jobs',{q:role,location:loc})],
+['University vacancies','Direct university sites',queryURL('https://www.google.com/search',{q:`${role} vacancy university ${loc} site:ac.uk`})]
+]}
+function keywords(text){const stop=new Set('the and with for from that this have your you are was were will into our their about using use job work experience skills professional responsibilities requirement requirements candidate role'.split(' '));return [...new Set((text.toLowerCase().match(/[a-z][a-z+.#-]{2,}/g)||[]).filter(x=>!stop.has(x)))].slice(0,80)}
+const ROLE_SKILLS={
+ 'data analyst':['sql','excel','python','power bi','tableau','statistics','analytics','data visualisation','reporting','database'],
+ 'software developer':['javascript','typescript','python','java','c#','git','api','testing','software development','agile'],
+ 'software engineer':['javascript','typescript','python','java','c++','git','api','testing','system design','agile'],
+ 'computer engineer':['c++','computer architecture','embedded systems','linux','hardware','firmware','networks','python','digital systems'],
+ 'it support':['windows','linux','active directory','microsoft 365','networking','troubleshooting','helpdesk','ticketing','hardware','customer service'],
+ 'machine learning engineer':['python','machine learning','pytorch','tensorflow','scikit-learn','mlops','statistics','docker','cloud','data'],
+ 'data scientist':['python','sql','statistics','machine learning','pandas','numpy','scikit-learn','data visualisation','research'],
+ 'lecturer in computer science':['phd','teaching','research','publications','supervision','computer science','curriculum','grant','academic'],
+ 'research scientist':['phd','research','publications','python','experiments','algorithms','machine learning','statistics','computer science'],
+ 'research fellow':['phd','research','publications','grant','experiments','academic','python','computer science'],
+ 'cyber security analyst':['cybersecurity','security','siem','networking','incident response','risk','linux','vulnerability','firewall'],
+ 'cloud engineer':['aws','azure','gcp','docker','kubernetes','terraform','linux','networking','devops','cloud'],
+ 'solutions architect':['architecture','cloud','aws','azure','system design','stakeholder','consulting','security','integration'],
+ 'ai research engineer':['python','machine learning','deep learning','pytorch','tensorflow','research','publications','algorithms','llm'],
+ 'computer vision engineer':['python','opencv','pytorch','tensorflow','deep learning','computer vision','image processing','c++'],
+ 'natural language processing engineer':['python','nlp','transformers','pytorch','tensorflow','llm','language models','machine learning'],
+ 'robotics software engineer':['c++','python','ros','robotics','control systems','linux','computer vision','embedded systems'],
+ 'research software engineer':['python','c++','git','research','hpc','scientific computing','testing','linux','software engineering'],
+ 'algorithm engineer':['algorithms','data structures','c++','python','optimisation','mathematics','complexity','research'],
+ 'high performance computing engineer':['hpc','linux','c++','python','parallel computing','cuda','mpi','clusters','slurm'],
+ 'database architect':['sql','database','postgresql','mysql','data modelling','performance','cloud','architecture','etl'],
+ 'computer science consultant':['consulting','computer science','architecture','stakeholder','strategy','research','software','data','cloud']
+};
+function normalise(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+#. -]/g,' ').replace(/\s+/g,' ').trim()}
+function roleKey(title){const t=normalise(title).replace(/^senior /,'').replace(/ - .*/,'');return Object.keys(ROLE_SKILLS).find(k=>t.includes(k))||Object.keys(ROLE_SKILLS).find(k=>k.includes(t))||'software engineer'}
+function cvEvidence(text,term){const t=normalise(text),q=normalise(term);if(t.includes(q))return true;const aliases={
+ 'javascript':['javascript','js','node.js','react'], 'typescript':['typescript','ts'], 'c#':['c#','.net','dotnet'], 'c++':['c++','cpp'],
+ 'machine learning':['machine learning','ml'], 'deep learning':['deep learning','neural network'], 'power bi':['power bi','powerbi'],
+ 'microsoft 365':['microsoft 365','office 365','m365'], 'active directory':['active directory','azure ad','entra id'],
+ 'cybersecurity':['cyber security','cybersecurity','information security'], 'data visualisation':['data visualization','data visualisation'],
+ 'phd':['phd','ph.d','doctor of philosophy','doctoral'], 'publications':['publication','published','journal','conference paper']
+ };return (aliases[q]||[]).some(x=>t.includes(x))}
+function experienceYears(text){const vals=[...String(text).matchAll(/(\d{1,2})\+?\s*(?:years?|yrs?)/gi)].map(m=>Number(m[1]));return vals.length?Math.max(...vals):0}
+function calculateCvMatch(cv,job,prefs){if(!cv||cv.trim().length<80)return null;const required=job.requirements||[];const matched=required.filter(x=>cvEvidence(cv,x));const skillScore=required.length?matched.length/required.length*50:0;
+ const titleTokens=keywords(job.title).filter(x=>x.length>3);const titleHits=titleTokens.filter(x=>cvEvidence(cv,x)).length;const roleScore=titleTokens.length?Math.min(15,titleHits/titleTokens.length*15):0;
+ const phdNeeded=/research|lecturer|scientist|fellow|academic/i.test(job.title);const hasPhd=cvEvidence(cv,'phd');const educationScore=phdNeeded?(hasPhd?12:0):(hasPhd?8:6);
+ const yrs=experienceYears(cv);const senior=/senior|principal|lead/i.test(job.title);const experienceScore=senior?Math.min(13,yrs/5*13):Math.min(13,Math.max(5,yrs/3*13));
+ let preferenceScore=0;if(prefs.type==='Any'||normalise(job.type).includes(normalise(prefs.type)))preferenceScore+=4;if(prefs.mode==='Any'||normalise(job.mode).includes(normalise(prefs.mode)))preferenceScore+=4;if(!prefs.salary||job.salaryValue>=prefs.salary)preferenceScore+=2;
+ const total=Math.max(0,Math.min(100,Math.round(skillScore+roleScore+educationScore+experienceScore+preferenceScore)));
+ return {total,matched,missing:required.filter(x=>!matched.includes(x)),parts:{skills:Math.round(skillScore),role:Math.round(roleScore),education:Math.round(educationScore),experience:Math.round(experienceScore),preferences:Math.round(preferenceScore)}}}
+function demoJobs(role,loc,salary,type,mode){const base=salary||26000;const titles=[role,`Senior ${role}`,`${role} — Public Sector`,`${role} — University`,`${role} — Growing SME`];const orgs=['Northbridge Services','Regional NHS Partner','City University','Civic Digital','Greenfield Group'];return titles.map((t,i)=>{const key=roleKey(t);const requirements=[...new Set([...(ROLE_SKILLS[key]||ROLE_SKILLS['software engineer']),...(i===3?['phd','research','publications']:[]),...(i===1?['leadership']:[])])].slice(0,12);const salaryValue=Math.round((base+(4-i)*1700)/100)*100;return {title:t,company:orgs[i],location:i===1?'Hybrid / '+loc:loc,salary:`£${salaryValue.toLocaleString('en-GB')}`,salaryValue,type:i===2?'Fixed-term':type==='Any'?'Permanent':type,mode:i===0?mode:i%2?'Hybrid':'On-site',requirements}})}
+$('#searchForm').addEventListener('reset',()=>{setTimeout(()=>{$('#results').hidden=true;$('#status').textContent='Ready to search';$('#status').className='status';cvText='';$('#cvNote').textContent='No CV selected.'},0)});
+$('#searchForm').addEventListener('submit',async e=>{e.preventDefault();const role=$('#role').value.trim(),loc=$('#address').value.trim(),radius=$('#radius').value,salary=Number($('#salary').value||0),type=$('#workType').value,mode=$('#workMode').value,userSkills=$('#skills').value.trim();const status=$('#status');status.textContent='Analysing profile and preparing multi-source search…';status.className='status';let geo='';if(/^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(loc)){try{const r=await fetch('https://api.postcodes.io/postcodes/'+encodeURIComponent(loc.replace(/\s/g,'')));const j=await r.json();if(j.status===200)geo=`Location verified: ${j.result.admin_district}, ${j.result.region}. `}catch(_){geo='Postcode verification unavailable. '}}
+const skillSet=keywords(userSkills+' '+cvText);const sources=makeSources(role,loc,radius,type);$('#sourceGrid').innerHTML=sources.map(x=>`<a class="source" target="_blank" rel="noopener" href="${esc(x[2])}"><b>${esc(x[0])}</b><span>${esc(x[1])} ↗</span></a>`).join('');
+const jobs=demoJobs(role,loc,salary,type,mode);const profileText=[cvText,userSkills].filter(Boolean).join(' ');const prefs={salary,type,mode};$('#jobList').innerHTML=jobs.map((j,i)=>{const match=calculateCvMatch(profileText,j,prefs);const badges=(match?match.matched.slice(0,4):j.requirements.slice(0,4));const scoreHtml=match?`<div class="score"><strong>${match.total}%</strong><small>CV match score</small><div class="score-breakdown"><b>Evidence:</b> skills ${match.parts.skills}/50, role ${match.parts.role}/15, education ${match.parts.education}/12, experience ${match.parts.experience}/13, preferences ${match.parts.preferences}/10</div><a class="apply" target="_blank" rel="noopener" href="${esc(sources[i%sources.length][2])}">View search</a></div>`:`<div class="score unavailable"><strong>CV required</strong><small>no score invented</small><div class="score-breakdown">Upload a text CV or enter detailed skills. A percentage is shown only when there is enough personal evidence.</div><a class="apply" target="_blank" rel="noopener" href="${esc(sources[i%sources.length][2])}">View search</a></div>`;return `<article class="job"><div><h4>${esc(j.title)}</h4><div class="meta"><b>${esc(j.company)}</b> · ${esc(j.location)}<br>${esc(j.salary)}+ · ${esc(j.type)} · ${esc(j.mode)}</div><div class="badges">${badges.map(s=>`<span class="badge">${esc(s)}</span>`).join('')}</div></div>${scoreHtml}</article>`}).join('');
+$('#aiSummary').innerHTML=`<b>CV-based matching:</b> ${esc(geo)}Searching for <b>${esc(role)}</b> within <b>${radius==='0'?'any distance':radius+' miles'}</b> of <b>${esc(loc)}</b>${salary?`, with a minimum target of <b>£${salary.toLocaleString('en-GB')}</b>`:''}. ${profileText.trim().length>=80?`The displayed percentages are calculated from this user's CV/skills and will change for another user. Detected evidence includes: <b>${esc(skillSet.slice(0,12).join(', ')||'profile text')}</b>.`:'No Match Score has been invented. Add a text CV or sufficiently detailed skills to calculate personalised scores.'} For production use, the same engine must receive the complete text of each real vacancy from an authorised job-data API.`;
+$('#resultLabel').textContent=`${sources.length} live source searches · ${jobs.length} ranked examples`;$('#results').hidden=false;status.textContent='Search workspace created';status.className='status good';$('#results').scrollIntoView({behavior:'smooth',block:'start'});
+// Log this search to Supabase analytics (same JobScout AI UK project)
+try{
+  if(window.NTAnalytics && typeof window.NTAnalytics.logSearch === 'function'){
+    const postcode = loc.replace(/\s/g,'').toUpperCase();
+    const label = role + ' — job search';
+    window.NTAnalytics.logSearch(postcode, label);
+  }
+}catch(_){}
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const addressInput=document.getElementById('address');
+ if(!addressInput) return;
+ const forceUppercase=()=>{
+   const start=addressInput.selectionStart;
+   const end=addressInput.selectionEnd;
+   addressInput.value=addressInput.value.toUpperCase();
+   try{addressInput.setSelectionRange(start,end);}catch(_){ }
+ };
+ addressInput.addEventListener('input',forceUppercase);
+ addressInput.addEventListener('change',forceUppercase);
+ addressInput.addEventListener('paste',()=>setTimeout(forceUppercase,0));
+});
+</script>
+
+<script>
+/* On-device profile persistence: saves the search profile and extracted CV text to this
+   browser's localStorage, so returning to this page on the same device pre-fills everything.
+   Nothing is sent anywhere — it stays in this browser only, until "Forget saved profile" is used. */
+const STORAGE_KEY='jobscoutai_uk_profile_v1';
+function debounce(fn,ms){let t;return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
+function collectFormValues(){return {role:$('#role').value,address:$('#address').value,radius:$('#radius').value,salary:$('#salary').value,workType:$('#workType').value,workMode:$('#workMode').value,skills:$('#skills').value,consent:$('#consent').checked}}
+function loadStoredProfile(){try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch(_){return null}}
+function saveProfile(cvMeta){
+ const existing=loadStoredProfile()||{};
+ const cv=cvMeta!==undefined?cvMeta:(existing.cv||null);
+ const data={...collectFormValues(),cv,savedAt:new Date().toISOString()};
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));updateStorageNote(data)}
+ catch(err){$('#storageNote').innerHTML='<b>On-device profile:</b> could not save (browser storage is full or disabled). Your CV may be too large — try a shorter export.'}
+}
+function applyProfile(data){
+ if(!data)return;
+ if(data.role)$('#role').value=data.role;
+ if(data.address)$('#address').value=data.address;
+ if(data.radius)$('#radius').value=data.radius;
+ if(data.salary)$('#salary').value=data.salary;
+ if(data.workType)$('#workType').value=data.workType;
+ if(data.workMode)$('#workMode').value=data.workMode;
+ if(data.skills)$('#skills').value=data.skills;
+ if(typeof data.consent==='boolean')$('#consent').checked=data.consent;
+ if(data.cv&&data.cv.text){cvText=data.cv.text;$('#cvNote').textContent=`${data.cv.name} restored from your saved profile (${cvText.length.toLocaleString('en-GB')} characters).`}
+}
+function updateStorageNote(data){
+ const note=$('#storageNote');if(!note)return;
+ if(!data){note.innerHTML='<b>On-device profile:</b> nothing saved yet. Your profile and CV text will be stored locally in this browser once you start typing.';return}
+ const when=new Date(data.savedAt).toLocaleString('en-GB',{dateStyle:'medium',timeStyle:'short'});
+ const cvBit=data.cv&&data.cv.name?` CV on file: <b>${esc(data.cv.name)}</b>.`:' No CV stored yet.';
+ note.innerHTML=`<b>On-device profile:</b> last saved ${esc(when)} in this browser.${cvBit}`;
+}
+const autoSave=debounce(()=>saveProfile(),500);
+['role','address','radius','salary','workType','workMode','skills','consent'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',autoSave);el.addEventListener('change',autoSave)});
+$('#searchForm').addEventListener('submit',()=>saveProfile());
+$('#btnForget').addEventListener('click',()=>{
+ if(!confirm('Remove your saved profile and CV text from this browser? This cannot be undone.'))return;
+ try{localStorage.removeItem(STORAGE_KEY)}catch(_){}
+ $('#searchForm').reset();cvText='';
+ $('#cvNote').textContent='No CV selected. PDF, DOCX and TXT are read and analysed entirely on this device.';
+ updateStorageNote(null);$('#profileBar').hidden=true;
+});
+document.addEventListener('DOMContentLoaded',()=>{
+ const stored=loadStoredProfile();
+ if(stored){
+  applyProfile(stored);updateStorageNote(stored);
+  const bar=$('#profileBar');bar.hidden=false;
+  const when=new Date(stored.savedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+  $('#profileBarMeta').textContent=`${stored.role?`Search for "${stored.role}" `:'Your details '}restored from ${when}. Review anything before searching again.`;
+  const dismiss=$('#btnDismissBar');if(dismiss)dismiss.addEventListener('click',()=>{bar.hidden=true});
+ }else{
+  updateStorageNote(null);
+ }
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
+<script>
+/*
+  SUPABASE SETUP
+  The complete database setup/reset SQL is embedded in this HTML.
+  Open the admin login, choose "Set or forgot password", generate the SQL,
+  then run it once in Supabase SQL Editor. No companion SQL file is required.
+*/
+(function(){
+  'use strict';
+
+// Supabase project: jobscout-ai-uk (public browser credentials only)
+  const SUPABASE_URL='https://gmbdalrwbpygvenvoqzi.supabase.co';
+    const SUPABASE_ANON='sb_publishable_hu-l_FzRxZjR77rs3hBfAg_DpvkGDM9';
+
+  const ONLINE_WINDOW_SECONDS = 90;
+  const HEARTBEAT_MS = 45000;
+  const ADMIN_SESSION_KEY = 'jobscout_ai_uk_admin_hash';
+  const ADMIN_LOCAL_KEY = 'jobscout_ai_uk_admin_hash_remembered';
+  const VISITOR_KEY = 'jobscout_ai_uk_visitor_id';
+  const SESSION_KEY = 'jobscout_ai_uk_session_id';
+  const USER_POSTCODE_KEY = 'jobscout_ai_uk_user_postcode';
+
+  const configured = !SUPABASE_URL.includes('YOUR-PROJECT') && !SUPABASE_ANON.includes('YOUR-SUPABASE');
+  const client = configured && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON, {auth:{persistSession:false,autoRefreshToken:false}}) : null;
+  const $ = id => document.getElementById(id);
+  const els = {trigger:$('adminTrigger'),login:$('adminLoginOverlay'),dash:$('adminDashOverlay'),settings:$('adminSettingsOverlay'),recovery:$('adminRecoveryOverlay'),clear:$('adminClearOverlay'),key:$('adminKeyInput'),remember:$('adminRememberKey'),loginError:$('adminLoginError'),loginSubmit:$('adminLoginSubmit'),stats:$('adminStatsGrid'),bars:$('adminBars'),popular:$('adminPopularList'),table:$('adminTableWrap'),tableCount:$('adminTableCount'),feedbackTable:$('adminFeedbackWrap'),feedbackCount:$('adminFeedbackCount'),feedbackSection:$('adminFeedbackSection'),feedbackViewBtn:$('adminViewFeedbackBtn'),chartTotal:$('adminChartTotal'),search:$('adminSearchBox'),range:$('adminRangeSelect'),dot:$('adminConnectionDot'),connection:$('adminConnectionText'),toast:$('adminToast')};
+  let adminHash = sessionStorage.getItem(ADMIN_SESSION_KEY) || localStorage.getItem(ADMIN_LOCAL_KEY) || '';
+  let analyticsData = {summary:{},sessions:[],searches:[],daily:[],popular:[],feedback:[]};
+  let pendingClearAction = null;
+  let tapCount=0,tapTimer=null,heartbeatTimer=null;
+
+  function uuid(){ return crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0,v=c==='x'?r:(r&3|8);return v.toString(16)}); }
+  function getPersistentId(key,store){ let id=store.getItem(key); if(!id){id=uuid();store.setItem(key,id)} return id; }
+  const visitorId=getPersistentId(VISITOR_KEY,localStorage);
+  const sessionId=getPersistentId(SESSION_KEY,sessionStorage);
+  function deviceInfo(){const ua=navigator.userAgent;let browser='Other';if(/Edg\//.test(ua))browser='Edge';else if(/Chrome\//.test(ua))browser='Chrome';else if(/Safari\//.test(ua)&&!/Chrome\//.test(ua))browser='Safari';else if(/Firefox\//.test(ua))browser='Firefox';let device=/Mobi|Android/i.test(ua)?'Mobile':'Desktop';if(/iPad|Tablet/i.test(ua))device='Tablet';return {browser,device,language:navigator.language||'',timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||''};}
+  async function sha256(text){const bytes=new TextEncoder().encode(text);const hash=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+  function clean(value,max=160){return String(value||'').trim().slice(0,max)}
+  function userPostcode(){try{return clean(localStorage.getItem(USER_POSTCODE_KEY),16).toUpperCase()}catch(_error){return ''}}
+  function setConnection(ok,text){els.dot?.classList.toggle('off',!ok);if(els.connection)els.connection.textContent=text|| (ok?'Supabase connected':'Supabase unavailable')}
+  function toast(message){if(!els.toast)return;els.toast.textContent=message;els.toast.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>els.toast.classList.remove('show'),2400)}
+
+  async function heartbeat(){
+    if(!client)return;
+    const d=deviceInfo();
+    try{const {error}=await client.rpc('track_visitor_session',{p_session_id:sessionId,p_visitor_id:visitorId,p_page_path:location.pathname||'/',p_referrer:clean(document.referrer,300),p_browser:d.browser,p_device_type:d.device,p_language:d.language,p_timezone:d.timezone,p_user_postcode:userPostcode()});if(error)throw error;setConnection(true)}catch(e){setConnection(false,'Tracking unavailable')}
+  }
+  async function logSearch(postcode,label){
+    if(!client)return;
+    await heartbeat();
+    const parts=clean(label,240).split(' — ');
+    const payload={session_id:sessionId,visitor_id:visitorId,user_postcode:userPostcode(),postcode:clean(postcode,16).toUpperCase(),search_query:clean(parts[0],120),resolved_label:clean(parts.slice(1).join(' — '),240)};
+    client.rpc('log_search_event',{p_session_id:payload.session_id,p_visitor_id:payload.visitor_id,p_user_postcode:payload.user_postcode,p_postcode:payload.postcode,p_search_query:payload.search_query,p_resolved_label:payload.resolved_label}).then(({error})=>{if(error)console.warn('Analytics insert failed:',error.message)});
+  }
+  window.NTAnalytics={logSearch,heartbeat};
+  if(client){heartbeat();heartbeatTimer=setInterval(heartbeat,HEARTBEAT_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')heartbeat()});window.addEventListener('pagehide',()=>{clearInterval(heartbeatTimer)})}
+
+  function openLogin(){els.loginError.textContent=configured?'':'Supabase is not configured in this file yet.';els.key.value='';els.login.hidden=false;setTimeout(()=>els.key.focus(),30)}
+  function closeLogin(){els.login.hidden=true}
+  function closeDash(){els.dash.hidden=true}
+  function activateTrigger(){tapCount++;clearTimeout(tapTimer);tapTimer=setTimeout(()=>tapCount=0,2600);if(tapCount>=3){tapCount=0;clearTimeout(tapTimer);adminHash?openDashboard():openLogin()}}
+  els.trigger.addEventListener('click',activateTrigger);
+  $('adminLoginCancel').addEventListener('click',closeLogin);els.login.addEventListener('click',e=>{if(e.target===els.login)closeLogin()});
+  $('adminPasswordToggle').addEventListener('click',e=>{const show=els.key.type==='password';els.key.type=show?'text':'password';e.currentTarget.textContent=show?'Hide':'Show'});
+  els.key.addEventListener('keydown',e=>{if(e.key==='Enter')els.loginSubmit.click()});
+  els.loginSubmit.addEventListener('click',async()=>{const raw=els.key.value;if(!raw){els.loginError.textContent='Enter the admin password.';return}if(!client){els.loginError.textContent='Add your Supabase URL and anon key in the file first.';return}els.loginSubmit.disabled=true;els.loginError.textContent='';try{const hash=await sha256(raw);const ok=await verifyAdmin(hash);if(!ok){els.loginError.textContent='Incorrect password.';return}adminHash=hash;sessionStorage.setItem(ADMIN_SESSION_KEY,hash);if(els.remember.checked)localStorage.setItem(ADMIN_LOCAL_KEY,hash);else localStorage.removeItem(ADMIN_LOCAL_KEY);closeLogin();await openDashboard()}catch(e){els.loginError.textContent=e.message||'Could not reach Supabase.'}finally{els.loginSubmit.disabled=false}});
+
+  async function verifyAdmin(hash){const {data,error}=await client.rpc('verify_admin_key',{p_key_hash:hash});if(error)throw new Error(error.message);return data===true}
+  async function fetchDashboard(){
+    const days=parseInt(els.range.value,10)||0;
+    const {data,error}=await client.rpc('get_admin_analytics',{p_key_hash:adminHash,p_days:days,p_online_seconds:ONLINE_WINDOW_SECONDS});
+    if(error)throw new Error(error.message);if(!data||data.authorised===false)throw new Error('Admin session is no longer authorised.');
+    analyticsData={summary:data.summary||{},sessions:data.sessions||[],searches:data.searches||[],daily:data.daily||[],popular:data.popular||[],feedback:data.feedback||[]};
+  }
+  async function openDashboard(){els.dash.hidden=false;els.table.innerHTML='<div class="admin-loading">Loading analytics…</div>';try{await fetchDashboard();setConnection(true);render()}catch(e){setConnection(false,'Connection failed');els.table.innerHTML='<div class="admin-empty">'+escapeHtml(e.message)+'</div>';if(/authorised/i.test(e.message)){logout();openLogin()}}}
+  $('adminDashClose').addEventListener('click',closeDash);els.dash.addEventListener('click',e=>{if(e.target===els.dash)closeDash()});
+  async function refreshDashboard(button){
+    const adminBody=els.dash.querySelector('.admin-body');
+    const previousScrollTop=adminBody ? adminBody.scrollTop : 0;
+    const previousHtml=button ? button.innerHTML : '';
+    if(button){button.disabled=true;button.innerHTML='⟳ Refreshing…';}
+    try{
+      await openDashboard();
+      if(adminBody)adminBody.scrollTop=previousScrollTop;
+    }finally{
+      if(button){button.disabled=false;button.innerHTML=previousHtml;}
+    }
+  }
+  $('adminRefreshBtn').addEventListener('click',e=>refreshDashboard(e.currentTarget));
+  $('adminReloadBtn').addEventListener('click',e=>refreshDashboard(e.currentTarget));
+  els.search.addEventListener('input',renderTable);els.range.addEventListener('change',openDashboard);
+  els.feedbackViewBtn.addEventListener('click',()=>{
+    const opening=els.feedbackSection.hidden;
+    els.feedbackSection.hidden=!opening;
+    els.feedbackViewBtn.classList.toggle('active',opening);
+    els.feedbackViewBtn.textContent=opening?'✕ Hide feedback':'✉ View feedback';
+    if(opening){renderFeedbackTable();els.feedbackSection.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+  els.feedbackTable.addEventListener('click',async e=>{
+    const btn=e.target.closest('[data-delete-feedback]');
+    if(!btn)return;
+    const id=Number(btn.dataset.deleteFeedback);
+    if(!Number.isSafeInteger(id)||id<1)return;
+    const name=btn.dataset.feedbackName||'this user';
+    if(!window.confirm(`Delete the feedback from ${name}? This cannot be undone.`))return;
+    btn.disabled=true;btn.textContent='Deleting…';
+    try{
+      const {data,error}=await client.rpc('delete_feedback_entry',{p_key_hash:adminHash,p_id:id});
+      if(error)throw error;
+      if(data!==true)throw new Error('The feedback could not be deleted or the admin session is not authorised.');
+      analyticsData.feedback=(analyticsData.feedback||[]).filter(r=>Number(r.id)!==id);
+      renderFeedbackTable();toast('Feedback deleted.');
+    }catch(ex){btn.disabled=false;btn.textContent='Delete';toast(ex.message||'Could not delete feedback.')}
+  });
+
+  function logout(){adminHash='';sessionStorage.removeItem(ADMIN_SESSION_KEY);localStorage.removeItem(ADMIN_LOCAL_KEY);closeDash()}
+
+  $('adminExportBtn').addEventListener('click',()=>{const rows=filteredRows();const header=['Time','Type','Visitor','Session','User postcode','Search postcode','Search','Resolved place','Browser','Device','Timezone'];const lines=[header.map(csv).join(',')];rows.forEach(r=>lines.push([r.created_at,r.type,r.visitor_id,r.session_id,r.user_postcode,r.postcode,r.search_query,r.resolved_label,r.browser,r.device_type,r.timezone].map(csv).join(',')));const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jobscout-ai-uk-analytics-'+new Date().toISOString().slice(0,10)+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+  function csv(v){const s=String(v||'');return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+
+  $('adminSettingsBtn').addEventListener('click',()=>{$('adminCurrentKey').value='';$('adminNewKey').value='';$('adminConfirmKey').value='';$('adminSettingsError').textContent='';els.settings.hidden=false;setTimeout(()=>$('adminCurrentKey').focus(),30)});
+  $('adminSettingsCancel').addEventListener('click',()=>els.settings.hidden=true);els.settings.addEventListener('click',e=>{if(e.target===els.settings)els.settings.hidden=true});
+  $('adminSavePassword').addEventListener('click',async e=>{const current=$('adminCurrentKey').value,newKey=$('adminNewKey').value,confirm=$('adminConfirmKey').value,error=$('adminSettingsError');error.textContent='';if(newKey.length<10){error.textContent='Use at least 10 characters.';return}if(newKey!==confirm){error.textContent='The new passwords do not match.';return}e.currentTarget.disabled=true;try{const currentHash=await sha256(current),newHash=await sha256(newKey);const {data,error:rpcError}=await client.rpc('change_admin_key',{p_current_hash:currentHash,p_new_hash:newHash});if(rpcError)throw rpcError;if(data!==true){error.textContent='Current password is incorrect.';return}adminHash=newHash;sessionStorage.setItem(ADMIN_SESSION_KEY,newHash);if(localStorage.getItem(ADMIN_LOCAL_KEY))localStorage.setItem(ADMIN_LOCAL_KEY,newHash);els.settings.hidden=true;toast('Admin password saved in Supabase.')}catch(ex){error.textContent=ex.message||'Could not save the password.'}finally{e.currentTarget.disabled=false}});
+
+  function filteredRows(){const q=els.search.value.trim().toLowerCase();const sessionMap=new Map((analyticsData.sessions||[]).map(s=>[s.session_id,s]));const searches=(analyticsData.searches||[]).map(x=>({...sessionMap.get(x.session_id),...x,type:'Search'}));const sessions=(analyticsData.sessions||[]).map(x=>({...x,created_at:x.started_at,type:'Session'}));return [...searches,...sessions].filter(r=>!q||[r.user_postcode,r.postcode,r.search_query,r.resolved_label,r.browser,r.device_type,r.timezone,r.visitor_id].join(' ').toLowerCase().includes(q)).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at))}
+  function render(){const s=analyticsData.summary||{};els.stats.innerHTML=[metric(s.online_now||0,'Online now','online'),metric(s.sessions_today||0,'Sessions today'),metric(s.sessions_period||0,'Sessions in range'),metric(s.unique_visitors||0,'Unique visitors'),metric(s.searches_period||0,'Searches'),metric(s.returning_visitors||0,'Returning visitors')].join('');renderChart();renderPopular();renderTable();renderFeedbackTable()}
+  function metric(value,label,cls=''){return `<article class="admin-metric ${cls}"><div class="value">${Number(value||0).toLocaleString('en-GB')}</div><div class="label">${escapeHtml(label)}</div></article>`}
+  function renderChart(){const days=analyticsData.daily||[];const max=Math.max(1,...days.map(d=>Number(d.sessions||0)));els.chartTotal.textContent=days.reduce((n,d)=>n+Number(d.sessions||0),0)+' sessions';els.bars.innerHTML=days.map(d=>{const h=Math.max(3,Math.round(Number(d.sessions||0)/max*130));const label=new Date((d.report_day||d.day)+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short'});return `<div class="admin-bar-col"><div class="admin-bar" style="height:${h}px" data-value="${Number(d.sessions||0)}"></div><span class="admin-bar-label">${label}</span></div>`}).join('')||'<div class="admin-empty">No data</div>'}
+  function renderPopular(){const list=analyticsData.popular||[];els.popular.innerHTML=list.length?list.map(x=>`<div class="admin-list-row"><b title="${escapeHtml(x.label||'Unknown')}">${escapeHtml(x.label||'Unknown')}</b><span>${Number(x.count||0).toLocaleString('en-GB')}</span></div>`).join(''):'<div class="admin-empty">No searches yet.</div>'}
+  function renderTable(){const rows=filteredRows();els.tableCount.textContent=rows.length+' records';if(!rows.length){els.table.innerHTML='<div class="admin-empty">No activity matches this filter.</div>';return}els.table.innerHTML=`<table class="admin-table"><thead><tr><th>Time</th><th>Type</th><th>User postcode</th><th>Search postcode</th><th>Search / page</th><th>Browser</th><th>Device</th><th>Timezone</th><th>Visitor</th></tr></thead><tbody>${rows.slice(0,1000).map(r=>`<tr><td>${escapeHtml(formatDate(r.created_at))}</td><td><span class="admin-badge">${escapeHtml(r.type)}</span></td><td>${escapeHtml(r.user_postcode||'—')}</td><td>${escapeHtml(r.postcode||'—')}</td><td>${escapeHtml(r.search_query||r.resolved_label||r.page_path||'—')}</td><td>${escapeHtml(r.browser||'—')}</td><td>${escapeHtml(r.device_type||'—')}</td><td class="muted">${escapeHtml(r.timezone||'—')}</td><td class="muted" title="${escapeHtml(r.visitor_id||'')}">${escapeHtml((r.visitor_id||'').slice(0,8)||'—')}</td></tr>`).join('')}</tbody></table>`}
+  function renderFeedbackTable(){
+    const rows=(analyticsData.feedback||[]).slice().sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+    els.feedbackCount.textContent=rows.length+' records';
+    if(!rows.length){els.feedbackTable.innerHTML='<div class="admin-empty">No feedback submitted yet.</div>';return}
+    els.feedbackTable.innerHTML=`<table class="admin-table"><thead><tr><th>Time</th><th>Name</th><th>Email</th><th>Mobile</th><th>Message</th><th>Actions</th></tr></thead><tbody>${rows.slice(0,500).map(r=>{
+      const email=String(r.email||'').trim();
+      const mobile=String(r.mobile||'').trim();
+      const subject=encodeURIComponent('Reply from JobScout AI UK: https://arokhlo.github.io/jobscout-ai-uk/');
+      const body=encodeURIComponent(`Hello ${r.name||''},\n\nThank you for your feedback regarding JobScout AI UK: https://arokhlo.github.io/jobscout-ai-uk/\n\n`);
+      const replyHref=email?`mailto:${encodeURIComponent(email)}?subject=${subject}&body=${body}`:(mobile?`sms:${encodeURIComponent(mobile)}?body=${body}`:'#');
+      return `<tr data-feedback-id="${Number(r.id)}"><td>${escapeHtml(formatDate(r.created_at))}</td><td>${escapeHtml(r.name||'—')}</td><td>${email?`<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`:'—'}</td><td>${mobile?`<a href="tel:${escapeHtml(mobile)}">${escapeHtml(mobile)}</a>`:'—'}</td><td class="admin-feedback-message">${escapeHtml(r.message||'—')}</td><td><div class="admin-row-actions"><a class="admin-row-btn reply" href="${escapeHtml(replyHref)}" ${replyHref==='#'?'aria-disabled="true" onclick="return false"':''}>Reply</a><button type="button" class="admin-row-btn delete" data-delete-feedback="${Number(r.id)}" data-feedback-name="${escapeHtml(r.name||'this user')}">Delete</button></div></td></tr>`
+    }).join('')}</tbody></table>`
+  }
+
+  function formatDate(v){if(!v)return'—';return new Date(v).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}
+  function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+  function buildSetupSql(adminKeyHash){
+    const hash=String(adminKeyHash||'').replace(/[^a-f0-9]/gi,'').toLowerCase();
+    return `-- JobScout AI UK: complete Supabase setup and admin password reset
+-- Generated inside JobScoutAI-UK8-deep.html
+begin;
+
+create extension if not exists pgcrypto;
+
+create table if not exists public.js_admin_settings(
+  id smallint primary key default 1 check (id=1),
+  admin_key_hash text not null,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.js_visitor_sessions(
+  session_id uuid primary key,
+  visitor_id uuid not null,
+  page_path text,
+  referrer text,
+  browser text,
+  device_type text,
+  language text,
+  timezone text,
+  user_postcode text,
+  started_at timestamptz not null default now(),
+  last_seen_at timestamptz not null default now()
+);
+
+create table if not exists public.js_search_events(
+  id bigint generated always as identity primary key,
+  session_id uuid not null,
+  visitor_id uuid not null,
+  user_postcode text,
+  postcode text,
+  search_query text,
+  resolved_label text,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.js_feedback(
+  id bigint generated always as identity primary key,
+  name text not null,
+  email text not null,
+  mobile text,
+  message text,
+  created_at timestamptz not null default now()
+);
+
+alter table public.js_visitor_sessions add column if not exists user_postcode text;
+alter table public.js_search_events add column if not exists user_postcode text;
+
+create index if not exists js_sessions_user_postcode_idx on public.js_visitor_sessions(user_postcode);
+create index if not exists js_search_user_postcode_idx on public.js_search_events(user_postcode);
+create index if not exists js_sessions_visitor_idx on public.js_visitor_sessions(visitor_id);
+create index if not exists js_sessions_last_seen_idx on public.js_visitor_sessions(last_seen_at desc);
+create index if not exists js_search_created_idx on public.js_search_events(created_at desc);
+create index if not exists js_search_session_idx on public.js_search_events(session_id);
+create index if not exists js_feedback_created_idx on public.js_feedback(created_at desc);
+
+alter table public.js_admin_settings enable row level security;
+alter table public.js_visitor_sessions enable row level security;
+alter table public.js_search_events enable row level security;
+alter table public.js_feedback enable row level security;
+
+revoke all on public.js_admin_settings from anon, authenticated;
+revoke all on public.js_visitor_sessions from anon, authenticated;
+revoke all on public.js_search_events from anon, authenticated;
+revoke all on public.js_feedback from anon, authenticated;
+
+insert into public.js_admin_settings(id,admin_key_hash,updated_at)
+values(1,'${hash}',now())
+on conflict(id) do update set admin_key_hash=excluded.admin_key_hash,updated_at=now();
+
+create or replace function public.verify_admin_key(p_key_hash text)
+returns boolean
+language sql
+security definer
+set search_path=public
+as $$
+  select exists(
+    select 1 from public.js_admin_settings
+    where id=1 and admin_key_hash=p_key_hash
+  );
+$$;
+
+drop function if exists public.track_visitor_session(uuid,uuid,text,text,text,text,text,text);
+drop function if exists public.track_visitor_session(uuid,uuid,text,text,text,text,text,text,text);
+
+create or replace function public.track_visitor_session(
+  p_session_id uuid,p_visitor_id uuid,p_page_path text,p_referrer text,
+  p_browser text,p_device_type text,p_language text,p_timezone text,p_user_postcode text
+)
+returns void
+language plpgsql
+security definer
+set search_path=public
+as $$
+begin
+  insert into public.js_visitor_sessions(
+    session_id,visitor_id,page_path,referrer,browser,device_type,language,timezone,user_postcode,started_at,last_seen_at
+  ) values(
+    p_session_id,p_visitor_id,left(coalesce(p_page_path,''),300),left(coalesce(p_referrer,''),500),
+    left(coalesce(p_browser,''),80),left(coalesce(p_device_type,''),40),
+    left(coalesce(p_language,''),40),left(coalesce(p_timezone,''),100),nullif(left(upper(trim(coalesce(p_user_postcode,''))),16),''),now(),now()
+  )
+  on conflict(session_id) do update set
+    last_seen_at=now(),page_path=excluded.page_path,referrer=excluded.referrer,
+    browser=excluded.browser,device_type=excluded.device_type,
+    language=excluded.language,timezone=excluded.timezone,
+    user_postcode=coalesce(excluded.user_postcode,public.js_visitor_sessions.user_postcode);
+end;
+$$;
+
+drop function if exists public.log_search_event(uuid,uuid,text,text,text);
+drop function if exists public.log_search_event(uuid,uuid,text,text,text,text);
+
+create or replace function public.log_search_event(
+  p_session_id uuid,p_visitor_id uuid,p_user_postcode text,p_postcode text,p_search_query text,p_resolved_label text
+)
+returns void
+language plpgsql
+security definer
+set search_path=public
+as $$
+begin
+  insert into public.js_search_events(session_id,visitor_id,user_postcode,postcode,search_query,resolved_label)
+  values(
+    p_session_id,p_visitor_id,nullif(left(upper(trim(coalesce(p_user_postcode,''))),16),''),left(upper(coalesce(p_postcode,'')),16),
+    left(coalesce(p_search_query,''),120),left(coalesce(p_resolved_label,''),240)
+  );
+end;
+$$;
+
+create or replace function public.change_admin_key(p_current_hash text,p_new_hash text)
+returns boolean
+language plpgsql
+security definer
+set search_path=public
+as $$
+begin
+  if length(coalesce(p_new_hash,''))<>64 then return false; end if;
+  update public.js_admin_settings
+  set admin_key_hash=p_new_hash,updated_at=now()
+  where id=1 and admin_key_hash=p_current_hash;
+  return found;
+end;
+$$;
+
+create or replace function public.submit_feedback(
+  p_name text,p_email text,p_mobile text,p_message text
+)
+returns boolean
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare
+  v_name text;
+  v_email text;
+begin
+  v_name:=left(trim(coalesce(p_name,'')),60);
+  v_email:=left(trim(coalesce(p_email,'')),120);
+  if v_name='' or v_email='' then return false; end if;
+  if v_email !~* '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$' then return false; end if;
+  insert into public.js_feedback(name,email,mobile,message)
+  values(
+    v_name,v_email,
+    nullif(left(trim(coalesce(p_mobile,'')),20),''),
+    nullif(left(trim(coalesce(p_message,'')),500),'')
+  );
+  return true;
+end;
+$$;
+
+create or replace function public.clear_visitor_activity(
+  p_key_hash text,p_older_than_days integer default 0
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare
+  v_cut timestamptz;
+  v_sessions integer;
+  v_searches integer;
+begin
+  if not public.verify_admin_key(p_key_hash) then
+    return jsonb_build_object('authorised',false);
+  end if;
+  if coalesce(p_older_than_days,0)<=0 then
+    delete from public.js_search_events where true;
+    get diagnostics v_searches = row_count;
+    delete from public.js_visitor_sessions where true;
+    get diagnostics v_sessions = row_count;
+  else
+    v_cut:=now()-(p_older_than_days||' days')::interval;
+    delete from public.js_search_events where created_at<v_cut;
+    get diagnostics v_searches = row_count;
+    delete from public.js_visitor_sessions where started_at<v_cut;
+    get diagnostics v_sessions = row_count;
+  end if;
+  return jsonb_build_object('authorised',true,'sessions_deleted',v_sessions,'searches_deleted',v_searches);
+end;
+$$;
+
+create or replace function public.delete_feedback_entry(
+  p_key_hash text,
+  p_id bigint
+)
+returns boolean
+language plpgsql
+security definer
+set search_path=public
+as $$
+begin
+  if not public.verify_admin_key(p_key_hash) then
+    return false;
+  end if;
+  delete from public.js_feedback where id=p_id;
+  return found;
+end;
+$$;
+
+create or replace function public.clear_feedback(
+  p_key_hash text,p_older_than_days integer default 0
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare
+  v_cut timestamptz;
+  v_count integer;
+begin
+  if not public.verify_admin_key(p_key_hash) then
+    return jsonb_build_object('authorised',false);
+  end if;
+  if coalesce(p_older_than_days,0)<=0 then
+    delete from public.js_feedback where true;
+    get diagnostics v_count = row_count;
+  else
+    v_cut:=now()-(p_older_than_days||' days')::interval;
+    delete from public.js_feedback where created_at<v_cut;
+    get diagnostics v_count = row_count;
+  end if;
+  return jsonb_build_object('authorised',true,'feedback_deleted',v_count);
+end;
+$$;
+
+create or replace function public.get_admin_analytics(
+  p_key_hash text,p_days integer default 7,p_online_seconds integer default 90
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare
+  v_from timestamptz;
+  v_result jsonb;
+begin
+  if not public.verify_admin_key(p_key_hash) then
+    return jsonb_build_object('authorised',false);
+  end if;
+
+  v_from:=case when coalesce(p_days,0)<=0 then '1970-01-01'::timestamptz
+               else now()-(p_days||' days')::interval end;
+
+  with
+  summary as (
+    select
+      (select count(*) from public.js_visitor_sessions where last_seen_at>=now()-(greatest(p_online_seconds,30)||' seconds')::interval) online_now,
+      (select count(*) from public.js_visitor_sessions where started_at>=date_trunc('day',now())) sessions_today,
+      (select count(*) from public.js_visitor_sessions where started_at>=v_from) sessions_period,
+      (select count(distinct visitor_id) from public.js_visitor_sessions where started_at>=v_from) unique_visitors,
+      (select count(*) from public.js_search_events where created_at>=v_from) searches_period,
+      (select count(*) from (
+        select visitor_id from public.js_visitor_sessions where started_at>=v_from
+        group by visitor_id having count(*)>1
+      ) x) returning_visitors,
+      (select count(*) from public.js_feedback where created_at>=v_from) feedback_total
+  ),
+  daily as (
+    select gs.report_day::date as report_day,
+      (select count(*) from public.js_visitor_sessions s
+       where s.started_at>=gs.report_day
+         and s.started_at<gs.report_day+interval '1 day') as sessions
+    from generate_series(
+      current_date-6,
+      current_date,
+      interval '1 day'
+    ) as gs(report_day)
+  ),
+  popular as (
+    select coalesce(nullif(search_query,''),nullif(resolved_label,''),'Unknown') label,count(*) count
+    from public.js_search_events where created_at>=v_from
+    group by 1 order by 2 desc limit 6
+  )
+  select jsonb_build_object(
+    'authorised',true,
+    'summary',(select to_jsonb(summary) from summary),
+    'sessions',coalesce((select jsonb_agg(to_jsonb(s) order by s.started_at desc)
+      from (select * from public.js_visitor_sessions where started_at>=v_from order by started_at desc limit 1000) s),'[]'::jsonb),
+    'searches',coalesce((select jsonb_agg(to_jsonb(e) order by e.created_at desc)
+      from (select * from public.js_search_events where created_at>=v_from order by created_at desc limit 1000) e),'[]'::jsonb),
+    'daily',coalesce((select jsonb_agg(to_jsonb(d) order by d.report_day) from daily d),'[]'::jsonb),
+    'popular',coalesce((select jsonb_agg(to_jsonb(p)) from popular p),'[]'::jsonb),
+    'feedback',coalesce((select jsonb_agg(to_jsonb(f) order by f.created_at desc)
+      from (select * from public.js_feedback order by created_at desc limit 500) f),'[]'::jsonb)
+  ) into v_result;
+  return v_result;
+end;
+$$;
+
+revoke all on function public.verify_admin_key(text) from public;
+revoke all on function public.track_visitor_session(uuid,uuid,text,text,text,text,text,text,text) from public;
+revoke all on function public.log_search_event(uuid,uuid,text,text,text,text) from public;
+revoke all on function public.change_admin_key(text,text) from public;
+revoke all on function public.get_admin_analytics(text,integer,integer) from public;
+revoke all on function public.submit_feedback(text,text,text,text) from public;
+revoke all on function public.clear_visitor_activity(text,integer) from public;
+revoke all on function public.delete_feedback_entry(text,bigint) from public;
+revoke all on function public.clear_feedback(text,integer) from public;
+
+grant execute on function public.verify_admin_key(text) to anon,authenticated;
+grant execute on function public.track_visitor_session(uuid,uuid,text,text,text,text,text,text,text) to anon,authenticated;
+grant execute on function public.log_search_event(uuid,uuid,text,text,text,text) to anon,authenticated;
+grant execute on function public.change_admin_key(text,text) to anon,authenticated;
+grant execute on function public.get_admin_analytics(text,integer,integer) to anon,authenticated;
+grant execute on function public.submit_feedback(text,text,text,text) to anon,authenticated;
+grant execute on function public.clear_visitor_activity(text,integer) to anon,authenticated;
+grant execute on function public.delete_feedback_entry(text,bigint) to anon,authenticated;
+grant execute on function public.clear_feedback(text,integer) to anon,authenticated;
+
+commit;`;
+  }
+
+  $('adminForgotPassword').addEventListener('click',()=>{
+    closeLogin();
+    $('adminRecoveryPassword').value='';
+    $('adminRecoveryConfirm').value='';
+    $('adminRecoveryError').textContent='';
+    $('adminSqlOutput').value='';
+    $('adminSqlOutput').hidden=true;
+    $('adminCopySql').hidden=true;
+    els.recovery.hidden=false;
+    setTimeout(()=>$('adminRecoveryPassword').focus(),30);
+  });
+  $('adminRecoveryCancel').addEventListener('click',()=>{
+    els.recovery.hidden=true;
+    openLogin();
+  });
+  els.recovery.addEventListener('click',e=>{if(e.target===els.recovery){els.recovery.hidden=true;openLogin()}});
+  $('adminGenerateSql').addEventListener('click',async()=>{
+    const pass=$('adminRecoveryPassword').value;
+    const confirm=$('adminRecoveryConfirm').value;
+    const error=$('adminRecoveryError');
+    error.textContent='';
+    if(pass.length<10){error.textContent='Use at least 10 characters.';return}
+    if(pass!==confirm){error.textContent='The passwords do not match.';return}
+    const hash=await sha256(pass);
+    $('adminSqlOutput').value=buildSetupSql(hash);
+    $('adminSqlOutput').hidden=false;
+    $('adminCopySql').hidden=false;
+    toast('Setup and reset SQL generated.');
+  });
+  $('adminCopySql').addEventListener('click',async()=>{
+    const sql=$('adminSqlOutput').value;
+    if(!sql)return;
+    try{await navigator.clipboard.writeText(sql);toast('SQL copied. Run it in Supabase SQL Editor.')}
+    catch(e){$('adminSqlOutput').focus();$('adminSqlOutput').select();document.execCommand('copy');toast('SQL copied.')}
+  });
+
+  function openClearDialog(kind){
+    pendingClearAction=kind;
+    $('adminClearRange').value='0';
+    $('adminClearError').textContent='';
+    $('adminClearTitle').textContent = kind==='feedback' ? 'Delete feedback messages' : 'Delete visitor activity';
+    $('adminClearBody').innerHTML = kind==='feedback'
+      ? 'This permanently deletes stored <b>feedback messages</b> from Supabase so they stop taking up database space. This cannot be undone.'
+      : 'This permanently deletes stored <b>visitor sessions and searches</b> from Supabase so they stop taking up database space. This cannot be undone.';
+    els.clear.hidden=false;
+  }
+  function closeClearDialog(){els.clear.hidden=true;pendingClearAction=null}
+  $('adminClearActivityBtn').addEventListener('click',()=>openClearDialog('activity'));
+  $('adminClearFeedbackBtn').addEventListener('click',()=>openClearDialog('feedback'));
+  $('adminClearCancel').addEventListener('click',closeClearDialog);
+  els.clear.addEventListener('click',e=>{if(e.target===els.clear)closeClearDialog()});
+  $('adminClearConfirm').addEventListener('click',async()=>{
+    const error=$('adminClearError');error.textContent='';
+    if(!client){error.textContent='Supabase is not configured in this file.';return}
+    if(!pendingClearAction)return;
+    const days=parseInt($('adminClearRange').value,10)||0;
+    const btn=$('adminClearConfirm');btn.disabled=true;
+    try{
+      const rpcName = pendingClearAction==='feedback' ? 'clear_feedback' : 'clear_visitor_activity';
+      const {data,error:rpcError}=await client.rpc(rpcName,{p_key_hash:adminHash,p_older_than_days:days});
+      if(rpcError)throw rpcError;
+      if(!data||data.authorised===false){error.textContent='Admin session is no longer authorised.';return}
+      const deletedCount = pendingClearAction==='feedback' ? (data.feedback_deleted||0) : ((data.sessions_deleted||0)+(data.searches_deleted||0));
+      closeClearDialog();
+      toast(deletedCount+' record(s) deleted from Supabase.');
+      await openDashboard();
+    }catch(ex){error.textContent=ex.message||'Could not delete records.'}
+    finally{btn.disabled=false}
+  });
+
+  async function submitFeedback(payload){
+    if(!client)throw new Error('Supabase is not configured yet.');
+    const {data,error}=await client.rpc('submit_feedback',{
+      p_name:clean(payload.name,60),
+      p_email:clean(payload.email,120),
+      p_mobile:clean(payload.mobile,20),
+      p_message:clean(payload.message,500)
+    });
+    if(error)throw new Error(error.message);
+    if(data!==true)throw new Error('Please check your name and email address.');
+    return true;
+  }
+  window.NTAnalytics.submitFeedback=submitFeedback;
+
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!els.clear.hidden)closeClearDialog();else if(!els.recovery.hidden){els.recovery.hidden=true;openLogin()}else if(!els.settings.hidden)els.settings.hidden=true;else if(!els.dash.hidden)closeDash();else if(!els.login.hidden)closeLogin()}});
+})();
+</script>
+<script>
+(function(){
+  const openBtn=document.getElementById('helpLaunchBtn');
+  const overlay=document.getElementById('helpOverlay');
+  const closeBtn=document.getElementById('helpCloseBtn');
+  if(!openBtn||!overlay||!closeBtn)return;
+  const dialog=overlay.querySelector('.help-dialog');
+  let previousFocus=null;
+  function openHelp(){previousFocus=document.activeElement;overlay.hidden=false;document.body.style.overflow='hidden';requestAnimationFrame(()=>dialog.focus());}
+  function closeHelp(){overlay.hidden=true;document.body.style.overflow='';if(previousFocus&&previousFocus.focus)previousFocus.focus();}
+  openBtn.addEventListener('click',openHelp);
+  closeBtn.addEventListener('click',closeHelp);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeHelp();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden){e.preventDefault();closeHelp();}});
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  const openBtn=document.getElementById('feedbackLaunchBtn');
+  const overlay=document.getElementById('feedbackOverlay');
+  const closeBtn=document.getElementById('feedbackClose');
+  const doneBtn=document.getElementById('feedbackDone');
+  const formView=document.getElementById('feedbackFormView');
+  const successView=document.getElementById('feedbackSuccess');
+  const form=document.getElementById('feedbackForm');
+  const submitBtn=document.getElementById('feedbackSubmit');
+  const errorBox=document.getElementById('feedbackError');
+  if(!openBtn||!overlay||!form)return;
+
+  const fields=[
+    {id:'fbName',countId:'fbNameCount',max:60},
+    {id:'fbEmail',countId:'fbEmailCount',max:120},
+    {id:'fbMobile',countId:'fbMobileCount',max:20},
+    {id:'fbMessage',countId:'fbMessageCount',max:500}
+  ];
+  fields.forEach(f=>{
+    const el=document.getElementById(f.id);
+    const counter=document.getElementById(f.countId);
+    if(!el||!counter)return;
+    const update=()=>{counter.textContent=el.value.length+' / '+f.max;el.classList.remove('invalid')};
+    el.addEventListener('input',update);
+    update();
+  });
+
+  let previousFocus=null;
+  function resetForm(){
+    form.reset();
+    fields.forEach(f=>{const el=document.getElementById(f.id);const c=document.getElementById(f.countId);if(el)el.classList.remove('invalid');if(c)c.textContent='0 / '+f.max});
+    errorBox.textContent='';
+    formView.hidden=false;
+    successView.hidden=true;
+  }
+  function openFeedback(){previousFocus=document.activeElement;resetForm();overlay.hidden=false;document.body.style.overflow='hidden';const first=document.getElementById('fbName');if(first)setTimeout(()=>first.focus(),30)}
+  function closeFeedback(){overlay.hidden=true;document.body.style.overflow='';if(previousFocus&&previousFocus.focus)previousFocus.focus()}
+  openBtn.addEventListener('click',openFeedback);
+  closeBtn.addEventListener('click',closeFeedback);
+  doneBtn.addEventListener('click',closeFeedback);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeFeedback()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden){e.preventDefault();closeFeedback()}});
+
+  function isValidEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
+
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    errorBox.textContent='';
+    const nameEl=document.getElementById('fbName');
+    const emailEl=document.getElementById('fbEmail');
+    const mobileEl=document.getElementById('fbMobile');
+    const messageEl=document.getElementById('fbMessage');
+    const name=nameEl.value.trim();
+    const email=emailEl.value.trim();
+    nameEl.classList.toggle('invalid',!name);
+    emailEl.classList.toggle('invalid',!email||!isValidEmail(email));
+    if(!name){errorBox.textContent='Please enter your name.';nameEl.focus();return}
+    if(!email||!isValidEmail(email)){errorBox.textContent='Please enter a valid email address.';emailEl.focus();return}
+    if(!window.NTAnalytics||typeof window.NTAnalytics.submitFeedback!=='function'){errorBox.textContent='Feedback service is not available right now.';return}
+    submitBtn.disabled=true;submitBtn.textContent='Sending…';
+    try{
+      await window.NTAnalytics.submitFeedback({name,email,mobile:mobileEl.value.trim(),message:messageEl.value.trim()});
+      formView.hidden=true;
+      successView.hidden=false;
+    }catch(ex){
+      errorBox.textContent=ex.message||'Could not send your feedback. Please try again.';
+    }finally{
+      submitBtn.disabled=false;submitBtn.textContent='Send feedback';
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+  const form=document.getElementById('searchForm');
+  if(!form) return;
+  form.addEventListener('submit',function(){
+    try{
+      window.dispatchEvent(new CustomEvent('jobscout-ai-uk-search',{detail:{
+        postcode:(document.getElementById('address')||{}).value||'',
+        query:(document.getElementById('role')||{}).value||'',
+        source:'jobscout-ai-uk'
+      }}));
+    }catch(_){ }
+  });
+})();
+</script>
+</body></html>
