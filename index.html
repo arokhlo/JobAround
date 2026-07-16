@@ -243,6 +243,9 @@ button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padd
 <div class="field"><label for="workType">Work type *</label><select id="workType" class="control"><option>Any</option><option>Permanent</option><option>Contract</option><option>Temporary</option><option>Part-time</option><option>Apprenticeship</option><option>Internship</option><option>Volunteer</option></select></div>
 <div class="field"><label for="workMode">Work mode</label><select id="workMode" class="control"><option>Any</option><option>On-site</option><option>Hybrid</option><option>Remote</option></select></div>
 <div class="field full"><label for="skills">Skills or preferences <span class="optional">(optional)</span></label><textarea id="skills" class="control" placeholder="e.g. Excel, customer service, NHS experience, no night shifts, visa sponsorship"></textarea></div>
+<div class="field wide"><label for="adzunaAppId">Adzuna App ID <span class="optional">(required for live UK vacancies)</span></label><input id="adzunaAppId" class="control" autocomplete="off" spellcheck="false" placeholder="Your Adzuna App ID" /></div>
+<div class="field wide"><label for="adzunaAppKey">Adzuna App Key <span class="optional">(required for live UK vacancies)</span></label><input id="adzunaAppKey" class="control" type="password" autocomplete="off" spellcheck="false" placeholder="Your Adzuna App Key" /></div>
+<div class="field full"><div class="file-note" style="background:#fff7e5;border:1px solid #e6d098;color:#6d5720;padding:10px;border-radius:8px;line-height:1.6"><b>⚠ Important — free UK job coverage / پوشش رایگان محدود است:</b><br>Without these two keys, this tool can only use small free feeds (mostly foreign/tech jobs) — it often finds very few or no local UK vacancies for a specific job title and postcode. Getting a key takes 2 minutes and is free:<br>1) Go to <b>developer.adzuna.com</b> → 2) Click "Register" and sign up with your email → 3) Copy your <b>App ID</b> and <b>App Key</b> from your account page → 4) Paste them in the two boxes above.<br><span style="color:#946200">بدون این دو کلید، این ابزار فقط به منابع رایگان محدود (بیشتر شغل‌های خارجی/فنی) دسترسی دارد و معمولاً برای یک عنوان شغلی و کدپستی خاص در بریتانیا نتیجه‌ی کمی پیدا می‌کند. گرفتن این کلید ۲ دقیقه طول می‌کشد و رایگان است: به سایت developer.adzuna.com بروید، روی Register کلیک کنید و با ایمیل ثبت‌نام کنید، سپس App ID و App Key را از صفحه حسابتان کپی کرده و در دو کادر بالا وارد کنید.</span></div></div>
 <div class="field full"><label>CV <span class="optional">(optional — PDF, DOCX and TXT are all extracted locally in your browser)</span></label><div class="filebox"><input id="cv" type="file" accept=".pdf,.txt,.doc,.docx" /><div id="cvNote" class="file-note">No CV selected. PDF, DOCX and TXT are read and analysed entirely on this device.</div></div></div>
 <div class="field full"><label class="consent"><input id="consent" type="checkbox" required /><span>I agree that my search information may be used to find and rank vacancies. I understand that external job sites have their own privacy policies.</span></label></div>
 </div>
@@ -256,7 +259,7 @@ button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padd
 <div id="aiSummary" class="ai-summary"></div>
 <div id="jobList" class="job-list"></div>
 </section>
-<section class="panel architecture"><h3>Production data architecture</h3><div class="flow"><div class="step"><b>1. User profile</b>Validated inputs, consent, encrypted CV storage and retention controls.</div><div class="step"><b>2. Job connectors</b>Official feeds, partner APIs, RSS, ATS feeds and organisation career pages.</div><div class="step"><b>3. Normalisation</b>Standardise title, salary, location, contract, skills and closing date.</div><div class="step"><b>4. AI matching</b>Skill extraction, title expansion, distance scoring, salary fit and duplicate removal.</div><div class="step"><b>5. Alerts</b>Saved searches, email notifications, application tracker and feedback learning.</div></div><div class="warning"><b>Important:</b> LinkedIn and Indeed do not provide an unrestricted public job-search API for arbitrary third-party apps. A production version must use approved partnerships, licensed aggregators, permitted feeds or outbound search links. Scraping everything blindly is fragile, legally risky and a splendid way to build a product that stops working on Tuesday.</div></section>
+<section class="panel architecture"><h3>Production data architecture</h3><div class="flow"><div class="step"><b>1. User profile</b>Validated inputs, consent, encrypted CV storage and retention controls.</div><div class="step"><b>2. Job connectors</b>Official feeds, partner APIs, RSS, ATS feeds and organisation career pages.</div><div class="step"><b>3. Normalisation</b>Standardise title, salary, location, contract, skills and closing date.</div><div class="step"><b>4. AI matching</b>Skill extraction, title expansion, distance scoring, salary fit and duplicate removal.</div><div class="step"><b>5. Alerts</b>Saved searches, email notifications, application tracker and feedback learning.</div></div></section>
 <footer>
 <div class="business-card">
 <strong>Prepared by Dr Mortaza Arokhlo</strong><br>
@@ -497,54 +500,207 @@ function makeSources(role,loc,radius,type){const q=[role,type!=='Any'?type:''].f
 ['University vacancies','Direct university sites',queryURL('https://www.google.com/search',{q:`${role} vacancy university ${loc} site:ac.uk`})]
 ]}
 function keywords(text){const stop=new Set('the and with for from that this have your you are was were will into our their about using use job work experience skills professional responsibilities requirement requirements candidate role'.split(' '));return [...new Set((text.toLowerCase().match(/[a-z][a-z+.#-]{2,}/g)||[]).filter(x=>!stop.has(x)))].slice(0,80)}
-const ROLE_SKILLS={
- 'data analyst':['sql','excel','python','power bi','tableau','statistics','analytics','data visualisation','reporting','database'],
- 'software developer':['javascript','typescript','python','java','c#','git','api','testing','software development','agile'],
- 'software engineer':['javascript','typescript','python','java','c++','git','api','testing','system design','agile'],
- 'computer engineer':['c++','computer architecture','embedded systems','linux','hardware','firmware','networks','python','digital systems'],
- 'it support':['windows','linux','active directory','microsoft 365','networking','troubleshooting','helpdesk','ticketing','hardware','customer service'],
- 'machine learning engineer':['python','machine learning','pytorch','tensorflow','scikit-learn','mlops','statistics','docker','cloud','data'],
- 'data scientist':['python','sql','statistics','machine learning','pandas','numpy','scikit-learn','data visualisation','research'],
- 'lecturer in computer science':['phd','teaching','research','publications','supervision','computer science','curriculum','grant','academic'],
- 'research scientist':['phd','research','publications','python','experiments','algorithms','machine learning','statistics','computer science'],
- 'research fellow':['phd','research','publications','grant','experiments','academic','python','computer science'],
- 'cyber security analyst':['cybersecurity','security','siem','networking','incident response','risk','linux','vulnerability','firewall'],
- 'cloud engineer':['aws','azure','gcp','docker','kubernetes','terraform','linux','networking','devops','cloud'],
- 'solutions architect':['architecture','cloud','aws','azure','system design','stakeholder','consulting','security','integration'],
- 'ai research engineer':['python','machine learning','deep learning','pytorch','tensorflow','research','publications','algorithms','llm'],
- 'computer vision engineer':['python','opencv','pytorch','tensorflow','deep learning','computer vision','image processing','c++'],
- 'natural language processing engineer':['python','nlp','transformers','pytorch','tensorflow','llm','language models','machine learning'],
- 'robotics software engineer':['c++','python','ros','robotics','control systems','linux','computer vision','embedded systems'],
- 'research software engineer':['python','c++','git','research','hpc','scientific computing','testing','linux','software engineering'],
- 'algorithm engineer':['algorithms','data structures','c++','python','optimisation','mathematics','complexity','research'],
- 'high performance computing engineer':['hpc','linux','c++','python','parallel computing','cuda','mpi','clusters','slurm'],
- 'database architect':['sql','database','postgresql','mysql','data modelling','performance','cloud','architecture','etl'],
- 'computer science consultant':['consulting','computer science','architecture','stakeholder','strategy','research','software','data','cloud']
+/*
+  Real-vacancy adapter.
+  Set JOBS_API_ENDPOINT to an authorised endpoint that returns either an array or
+  { jobs: [...] }. Each vacancy should ideally include:
+  title, company, location, postcode, latitude, longitude, salary/salary_min,
+  type, mode, description, url and skills.
+  No sample vacancies or invented skills are generated in this browser.
+*/
+const JOBS_API_ENDPOINT='';
+const PUBLIC_JOB_FEEDS={
+ adzuna:'https://api.adzuna.com/v1/api/jobs/gb/search/1',
+ arbeitnow:'https://www.arbeitnow.com/api/job-board-api',
+ remotive:'https://remotive.com/api/remote-jobs'
 };
+function jsonp(url,timeoutMs=18000){
+ return new Promise((resolve,reject)=>{
+  const callback='__jobscout_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  const script=document.createElement('script');let finished=false;
+  const cleanup=()=>{delete window[callback];script.remove()};
+  const timer=setTimeout(()=>{if(finished)return;finished=true;cleanup();reject(new Error('The live vacancy service timed out.'))},timeoutMs);
+  window[callback]=data=>{if(finished)return;finished=true;clearTimeout(timer);cleanup();resolve(data)};
+  script.onerror=()=>{if(finished)return;finished=true;clearTimeout(timer);cleanup();reject(new Error('The live vacancy service could not be reached.'))};
+  const u=new URL(url);u.searchParams.set('callback',callback);u.searchParams.set('content-type','application/jsonp');script.src=u.href;document.head.appendChild(script);
+ });
+}
+async function fetchAdzuna(params){
+ const appId=$('#adzunaAppId').value.trim(),appKey=$('#adzunaAppKey').value.trim();
+ if(!appId||!appKey)return [];
+ const u=new URL(PUBLIC_JOB_FEEDS.adzuna);
+ u.searchParams.set('app_id',appId);u.searchParams.set('app_key',appKey);
+ u.searchParams.set('what',params.q);u.searchParams.set('where',params.location);
+ u.searchParams.set('results_per_page','50');u.searchParams.set('sort_by','date');
+ if(Number(params.radius)>0)u.searchParams.set('distance',String(params.radius));
+ if(Number(params.min_salary)>0)u.searchParams.set('salary_min',String(params.min_salary));
+ const data=await jsonp(u.href);const rows=Array.isArray(data&&data.results)?data.results:[];
+ return rows.map(x=>mapApiJob({
+  title:x.title,company:x.company&&x.company.display_name,location:x.location&&x.location.display_name,
+  latitude:x.latitude,longitude:x.longitude,description:x.description,url:x.redirect_url,
+  salary_min:x.salary_min,salary_max:x.salary_max,type:x.contract_type||x.contract_time||'Not stated',
+  mode:/remote|home.?based/i.test([x.title,x.description,x.location&&x.location.display_name].join(' '))?'Remote':'On-site / hybrid not stated',
+  skills:[]
+ })).filter(x=>titleMatches(x,params.q));
+}
+const SKILL_TERMS=[
+ 'sql','python','javascript','typescript','java','c#','c++','php','ruby','go','rust','swift','kotlin',
+ 'excel','power bi','tableau','statistics','analytics','data visualisation','reporting','database',
+ 'postgresql','mysql','oracle','mongodb','aws','azure','gcp','docker','kubernetes','terraform','linux',
+ 'windows','active directory','microsoft 365','networking','troubleshooting','helpdesk','customer service',
+ 'machine learning','deep learning','pytorch','tensorflow','scikit-learn','pandas','numpy','nlp',
+ 'computer vision','opencv','git','api','testing','agile','scrum','research','teaching','leadership',
+ 'project management','communication','driving licence','care certificate','safeguarding','first aid'
+];
 function normalise(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+#. -]/g,' ').replace(/\s+/g,' ').trim()}
-function roleKey(title){const t=normalise(title).replace(/^senior /,'').replace(/ - .*/,'');return Object.keys(ROLE_SKILLS).find(k=>t.includes(k))||Object.keys(ROLE_SKILLS).find(k=>k.includes(t))||'software engineer'}
-function cvEvidence(text,term){const t=normalise(text),q=normalise(term);if(t.includes(q))return true;const aliases={
- 'javascript':['javascript','js','node.js','react'], 'typescript':['typescript','ts'], 'c#':['c#','.net','dotnet'], 'c++':['c++','cpp'],
- 'machine learning':['machine learning','ml'], 'deep learning':['deep learning','neural network'], 'power bi':['power bi','powerbi'],
- 'microsoft 365':['microsoft 365','office 365','m365'], 'active directory':['active directory','azure ad','entra id'],
- 'cybersecurity':['cyber security','cybersecurity','information security'], 'data visualisation':['data visualization','data visualisation'],
- 'phd':['phd','ph.d','doctor of philosophy','doctoral'], 'publications':['publication','published','journal','conference paper']
- };return (aliases[q]||[]).some(x=>t.includes(x))}
-function experienceYears(text){const vals=[...String(text).matchAll(/(\d{1,2})\+?\s*(?:years?|yrs?)/gi)].map(m=>Number(m[1]));return vals.length?Math.max(...vals):0}
-function calculateCvMatch(cv,job,prefs){if(!cv||cv.trim().length<80)return null;const required=job.requirements||[];const matched=required.filter(x=>cvEvidence(cv,x));const skillScore=required.length?matched.length/required.length*50:0;
- const titleTokens=keywords(job.title).filter(x=>x.length>3);const titleHits=titleTokens.filter(x=>cvEvidence(cv,x)).length;const roleScore=titleTokens.length?Math.min(15,titleHits/titleTokens.length*15):0;
- const phdNeeded=/research|lecturer|scientist|fellow|academic/i.test(job.title);const hasPhd=cvEvidence(cv,'phd');const educationScore=phdNeeded?(hasPhd?12:0):(hasPhd?8:6);
- const yrs=experienceYears(cv);const senior=/senior|principal|lead/i.test(job.title);const experienceScore=senior?Math.min(13,yrs/5*13):Math.min(13,Math.max(5,yrs/3*13));
- let preferenceScore=0;if(prefs.type==='Any'||normalise(job.type).includes(normalise(prefs.type)))preferenceScore+=4;if(prefs.mode==='Any'||normalise(job.mode).includes(normalise(prefs.mode)))preferenceScore+=4;if(!prefs.salary||job.salaryValue>=prefs.salary)preferenceScore+=2;
- const total=Math.max(0,Math.min(100,Math.round(skillScore+roleScore+educationScore+experienceScore+preferenceScore)));
- return {total,matched,missing:required.filter(x=>!matched.includes(x)),parts:{skills:Math.round(skillScore),role:Math.round(roleScore),education:Math.round(educationScore),experience:Math.round(experienceScore),preferences:Math.round(preferenceScore)}}}
-function demoJobs(role,loc,salary,type,mode){const base=salary||26000;const titles=[role,`Senior ${role}`,`${role} — Public Sector`,`${role} — University`,`${role} — Growing SME`];const orgs=['Northbridge Services','Regional NHS Partner','City University','Civic Digital','Greenfield Group'];return titles.map((t,i)=>{const key=roleKey(t);const requirements=[...new Set([...(ROLE_SKILLS[key]||ROLE_SKILLS['software engineer']),...(i===3?['phd','research','publications']:[]),...(i===1?['leadership']:[])])].slice(0,12);const salaryValue=Math.round((base+(4-i)*1700)/100)*100;return {title:t,company:orgs[i],location:i===1?'Hybrid / '+loc:loc,salary:`£${salaryValue.toLocaleString('en-GB')}`,salaryValue,type:i===2?'Fixed-term':type==='Any'?'Permanent':type,mode:i===0?mode:i%2?'Hybrid':'On-site',requirements}})}
+function validUkPostcode(value){return /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(String(value||'').trim())}
+function formatPostcode(value){const raw=String(value||'').replace(/\s/g,'').toUpperCase();return raw.length>3?raw.slice(0,-3)+' '+raw.slice(-3):raw}
+async function postcodeCoordinates(value){
+ if(!validUkPostcode(value))return null;
+ try{const r=await fetch('https://api.postcodes.io/postcodes/'+encodeURIComponent(String(value).replace(/\s/g,'')));if(!r.ok)return null;const j=await r.json();if(j.status!==200||!j.result)return null;return {latitude:Number(j.result.latitude),longitude:Number(j.result.longitude),postcode:j.result.postcode,area:[j.result.admin_district,j.result.region].filter(Boolean).join(', ')}}
+ catch(_){return null}
+}
+const placeCache=new Map();
+async function placeCoordinates(value){
+ const key=normalise(value);if(!key)return null;if(placeCache.has(key))return placeCache.get(key);
+ const pc=extractPostcode(value);if(pc){const result=await postcodeCoordinates(pc);placeCache.set(key,result);return result}
+ try{
+  const cleaned=String(value).replace(/\b(uk|united kingdom|england|scotland|wales|northern ireland)\b/ig,'').replace(/[,|]/g,' ').replace(/\s+/g,' ').trim();
+  const r=await fetch('https://api.postcodes.io/places?q='+encodeURIComponent(cleaned));
+  if(!r.ok){placeCache.set(key,null);return null}
+  const j=await r.json(),rows=j&&j.result;if(!Array.isArray(rows)||!rows.length){placeCache.set(key,null);return null}
+  const x=rows[0];const result={latitude:Number(x.latitude),longitude:Number(x.longitude),postcode:'',area:x.name_1||x.name_2||cleaned};placeCache.set(key,result);return result
+ }catch(_){placeCache.set(key,null);return null}
+}
+function mapsLink(originLabel,job){
+ const dest=job.resolvedPostcode||extractPostcode(job.location)||[job.location,job.company,'UK'].filter(Boolean).join(', ');
+ const destQ=encodeURIComponent(dest);
+ if(originLabel){const origQ=encodeURIComponent(originLabel);return `https://www.google.com/maps/dir/?api=1&origin=${origQ}&destination=${destQ}`}
+ return `https://www.google.com/maps/search/?api=1&query=${destQ}`
+}
+function haversineMiles(a,b){
+ const rad=x=>x*Math.PI/180,R=3958.7613;const dLat=rad(b.latitude-a.latitude),dLon=rad(b.longitude-a.longitude);const lat1=rad(a.latitude),lat2=rad(b.latitude);
+ const h=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(h)))
+}
+function extractPostcode(text){const m=String(text||'').toUpperCase().match(/\b([A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2})\b/);return m?formatPostcode(m[1]):''}
+function stripHtml(value){const d=document.createElement('div');d.innerHTML=String(value||'');return d.textContent||''}
+function extractRealSkills(job){
+ const supplied=Array.isArray(job.skills)?job.skills.filter(Boolean).map(String):[];
+ if(supplied.length)return [...new Set(supplied.map(x=>x.trim()).filter(Boolean))].slice(0,12);
+ const text=normalise([job.title,job.description,job.requirements].filter(Boolean).join(' '));
+ return SKILL_TERMS.filter(term=>text.includes(normalise(term))).slice(0,12)
+}
+function salaryNumber(job){return Number(job.salary_min||job.salaryValue||0)||0}
+function formatSalary(job){
+ if(typeof job.salary==='string'&&job.salary.trim())return job.salary.trim();
+ const min=Number(job.salary_min||0),max=Number(job.salary_max||0);if(min&&max)return `£${min.toLocaleString('en-GB')}–£${max.toLocaleString('en-GB')}`;if(min)return `From £${min.toLocaleString('en-GB')}`;return 'Salary not stated'
+}
+function mapApiJob(raw){return {title:raw.title||raw.job_title||'Untitled vacancy',company:raw.company||raw.employer||'Employer not stated',location:raw.location||raw.city||raw.address||raw.postcode||'Location not stated',postcode:raw.postcode||extractPostcode([raw.location,raw.address].join(' ')),latitude:Number(raw.latitude||raw.lat)||null,longitude:Number(raw.longitude||raw.lng||raw.lon)||null,salary:raw.salary||'',salary_min:raw.salary_min||raw.min_salary||0,salary_max:raw.salary_max||raw.max_salary||0,type:raw.type||raw.contract_type||'Not stated',mode:raw.mode||raw.work_mode||'Not stated',description:stripHtml(raw.description||raw.summary||''),requirements:stripHtml(raw.requirements||''),skills:raw.skills,url:raw.url||raw.redirect_url||raw.apply_url||''}}
+function titleMatches(job,query){
+ const terms=normalise(query).split(' ').filter(x=>x.length>1);if(!terms.length)return true;
+ const hay=normalise([job.title,job.description].join(' '));
+ if(normalise(job.title).includes(normalise(query)))return true;
+ const hits=terms.filter(t=>hay.includes(t)).length;
+ return hits>=Math.max(1,Math.ceil(terms.length*0.6))
+}
+const NON_UK_LOCATION=/\b(germany|deutschland|berlin|munich|hamburg|frankfurt|france|paris|netherlands|amsterdam|spain|madrid|barcelona|italy|milan|rome|poland|warsaw|portugal|lisbon|austria|vienna|switzerland|zurich|belgium|brussels|sweden|stockholm|denmark|copenhagen|norway|oslo|usa|united states|canada|india|australia|dubai|singapore)\b/i;
+function appearsUk(job){
+ if(validUkPostcode(job.postcode||''))return true;
+ const loc=job.location||'';
+ if(/\b(uk|united kingdom|england|scotland|wales|northern ireland|london|manchester|birmingham|leeds|glasgow|liverpool|bristol|sheffield|edinburgh|cardiff|belfast|nottingham|newcastle|leicester|coventry|bradford|reading|oxford|cambridge|preston|lancashire)\b/i.test(loc))return true;
+ if(NON_UK_LOCATION.test(loc))return false; // clearly based elsewhere — exclude
+ return true; // location unclear rather than confirmed elsewhere — keep it, the distance check will flag/verify it
+}
+async function fetchArbeitnow(query){
+ const jobs=[];
+ for(let page=1;page<=3;page++){
+  try{const r=await fetch(PUBLIC_JOB_FEEDS.arbeitnow+'?page='+page,{headers:{Accept:'application/json'}});if(!r.ok)break;const j=await r.json();const rows=Array.isArray(j.data)?j.data:[];jobs.push(...rows.map(x=>mapApiJob({title:x.title,company:x.company_name,location:x.location,description:x.description,url:x.url,type:(x.job_types||[]).join(', ')||'Not stated',mode:x.remote?'Remote':'On-site / hybrid not stated',skills:x.tags||[]})).filter(x=>titleMatches(x,query)&&appearsUk(x)))}catch(_){break}
+ }
+ return jobs
+}
+async function fetchRemotive(query){
+ try{const r=await fetch(PUBLIC_JOB_FEEDS.remotive+'?search='+encodeURIComponent(query),{headers:{Accept:'application/json'}});if(!r.ok)return[];const j=await r.json();return (Array.isArray(j.jobs)?j.jobs:[]).map(x=>mapApiJob({title:x.title,company:x.company_name,location:x.candidate_required_location||'Remote',description:x.description,url:x.url,type:x.job_type||'Not stated',mode:'Remote',salary:x.salary||'',skills:x.tags||[]})).filter(x=>titleMatches(x,query))}catch(_){return[]}
+}
+async function fetchRealJobs(params){
+ if(JOBS_API_ENDPOINT){
+  const u=new URL(JOBS_API_ENDPOINT,location.href);Object.entries(params).forEach(([k,v])=>{if(v!==''&&v!=null)u.searchParams.set(k,v)});
+  const r=await fetch(u.href,{headers:{Accept:'application/json'}});if(!r.ok)throw new Error(`Vacancy service returned HTTP ${r.status}`);const data=await r.json();const rows=Array.isArray(data)?data:(Array.isArray(data.jobs)?data.jobs:[]);return rows.map(mapApiJob)
+ }
+ const local=[];
+ const adzunaId=$('#adzunaAppId').value.trim(),adzunaKey=$('#adzunaAppKey').value.trim();
+ if(adzunaId&&adzunaKey)local.push(...await fetchAdzuna(params));
+ else local.push(...await fetchArbeitnow(params.q));
+ if(Number(params.radius)===0||String(params.mode).toLowerCase()==='remote')local.push(...await fetchRemotive(params.q));
+ const seen=new Set();return local.filter(j=>{const k=normalise(j.title+'|'+j.company+'|'+j.location);if(seen.has(k))return false;seen.add(k);return true})
+}
+async function resolveJobCoordinates(job){
+ if(Number.isFinite(job.latitude)&&Number.isFinite(job.longitude))return {latitude:job.latitude,longitude:job.longitude,postcode:job.postcode||''};
+ const pc=job.postcode||extractPostcode(job.location);if(pc)return await postcodeCoordinates(pc);return await placeCoordinates(job.location)
+}
+async function prepareJobs(rawJobs,origin,selectedRadius,prefs){
+ const remoteAnywhere=Number(selectedRadius)===0;const out=[];
+ for(const job of rawJobs){
+  if(prefs.salary&&salaryNumber(job)&&salaryNumber(job)<prefs.salary)continue;
+  if(prefs.type!=='Any'&&!normalise(job.type).includes(normalise(prefs.type)))continue;
+  if(prefs.mode!=='Any'&&!normalise(job.mode).includes(normalise(prefs.mode)))continue;
+  const remote=/remote|home.?based|anywhere/i.test([job.mode,job.location].join(' '));
+  let distance=null,coords=null,distanceUnverified=false;
+  if(origin)coords=await resolveJobCoordinates(job);
+  if(origin&&coords)distance=haversineMiles(origin,coords);
+  if(!remoteAnywhere){
+   if(!origin)continue;                 // a valid postcode is still required to know where "nearby" means
+   if(distance!=null&&distance>Number(selectedRadius)+1e-9)continue;   // clearly outside the chosen radius
+   if(distance==null)distanceUnverified=true;  // location known only as a place name — show it, but flag it clearly
+  }else if(!remote&&distance==null){
+   distanceUnverified=true; // Anywhere mode: still show on-site jobs even if the exact distance can't be confirmed
+  }
+  out.push({...job,distance,distanceUnverified,skills:extractRealSkills(job),resolvedPostcode:(coords&&coords.postcode)||job.postcode||''})
+ }
+ return out.sort((a,b)=>(a.distance??Number.MAX_VALUE)-(b.distance??Number.MAX_VALUE))
+}
+function calculateCvMatch(cv,job,prefs){
+ if(!cv||cv.trim().length<80)return null;const required=job.skills||[];if(!required.length)return null;
+ const matched=required.filter(x=>normalise(cv).includes(normalise(x)));const skillScore=Math.round(matched.length/required.length*70);
+ let preferenceScore=0;if(prefs.type==='Any'||normalise(job.type).includes(normalise(prefs.type)))preferenceScore+=10;if(prefs.mode==='Any'||normalise(job.mode).includes(normalise(prefs.mode)))preferenceScore+=10;if(!prefs.salary||!salaryNumber(job)||salaryNumber(job)>=prefs.salary)preferenceScore+=10;
+ return {total:Math.min(100,skillScore+preferenceScore),matched,parts:{skills:skillScore,preferences:preferenceScore}}
+}
+function renderJob(job,index,originLabel,prefs){
+ const match=calculateCvMatch(prefs.profileText,job,prefs);const skills=job.skills||[];
+ const isRemote=/remote|home.?based|anywhere/i.test([job.mode,job.location].join(' '));
+ let distanceText;
+ if(job.distance!=null)distanceText=`<b>${job.distance.toFixed(1)} miles</b> from ${esc(originLabel)}`;
+ else if(isRemote)distanceText='Remote / distance not applicable';
+ else if(job.distanceUnverified)distanceText='<span style="color:#946200">Exact distance not confirmed</span> — check the address below or view on the map';
+ else distanceText='Not stated';
+ const skillsHtml=skills.length?`<div class="badges">${skills.map(s=>`<span class="badge">${esc(s)}</span>`).join('')}</div>`:'';
+ const mapBtn=isRemote?'':`<a class="apply" style="background:var(--green);margin-left:6px" target="_blank" rel="noopener" href="${esc(mapsLink(originLabel,job))}">View on map</a>`;
+ const scoreHtml=match?`<div class="score"><strong>${match.total}%</strong><small>CV match score</small><div class="score-breakdown"><b>Evidence:</b> vacancy skills ${match.parts.skills}/70, preferences ${match.parts.preferences}/30</div>${job.url?`<a class="apply" target="_blank" rel="noopener" href="${esc(job.url)}">View vacancy</a>`:''}${mapBtn}</div>`:`<div class="score unavailable"><strong>${job.distance==null?(isRemote?'Remote':'—'):job.distance.toFixed(1)+' mi'}</strong><small>${job.distance!=null?'distance from you':'distance'}</small>${job.url?`<a class="apply" target="_blank" rel="noopener" href="${esc(job.url)}">View vacancy</a>`:''}${mapBtn}</div>`;
+ return `<article class="job"><div><h4>${esc(job.title)}</h4><div class="meta"><b>${esc(job.company)}</b> · ${esc(job.location)}${job.resolvedPostcode?` (${esc(job.resolvedPostcode)})`:''}<br><b>Distance:</b> ${distanceText}<br>${esc(formatSalary(job))} · ${esc(job.type)} · ${esc(job.mode)}</div>${skillsHtml}</div>${scoreHtml}</article>`
+}
 $('#searchForm').addEventListener('reset',()=>{setTimeout(()=>{$('#results').hidden=true;$('#status').textContent='Ready to search';$('#status').className='status';cvText='';$('#cvNote').textContent='No CV selected.'},0)});
-$('#searchForm').addEventListener('submit',async e=>{e.preventDefault();const role=$('#role').value.trim(),loc=$('#address').value.trim(),radius=$('#radius').value,salary=Number($('#salary').value||0),type=$('#workType').value,mode=$('#workMode').value,userSkills=$('#skills').value.trim();const status=$('#status');status.textContent='Analysing profile and preparing multi-source search…';status.className='status';let geo='';if(/^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(loc)){try{const r=await fetch('https://api.postcodes.io/postcodes/'+encodeURIComponent(loc.replace(/\s/g,'')));const j=await r.json();if(j.status===200)geo=`Location verified: ${j.result.admin_district}, ${j.result.region}. `}catch(_){geo='Postcode verification unavailable. '}}
-const skillSet=keywords(userSkills+' '+cvText);const sources=makeSources(role,loc,radius,type);$('#sourceGrid').innerHTML=sources.map(x=>`<a class="source" target="_blank" rel="noopener" href="${esc(x[2])}"><b>${esc(x[0])}</b><span>${esc(x[1])} ↗</span></a>`).join('');
-const jobs=demoJobs(role,loc,salary,type,mode);const profileText=[cvText,userSkills].filter(Boolean).join(' ');const prefs={salary,type,mode};$('#jobList').innerHTML=jobs.map((j,i)=>{const match=calculateCvMatch(profileText,j,prefs);const badges=(match?match.matched.slice(0,4):j.requirements.slice(0,4));const scoreHtml=match?`<div class="score"><strong>${match.total}%</strong><small>CV match score</small><div class="score-breakdown"><b>Evidence:</b> skills ${match.parts.skills}/50, role ${match.parts.role}/15, education ${match.parts.education}/12, experience ${match.parts.experience}/13, preferences ${match.parts.preferences}/10</div><a class="apply" target="_blank" rel="noopener" href="${esc(sources[i%sources.length][2])}">View search</a></div>`:`<div class="score unavailable"><strong>CV required</strong><small>no score invented</small><div class="score-breakdown">Upload a text CV or enter detailed skills. A percentage is shown only when there is enough personal evidence.</div><a class="apply" target="_blank" rel="noopener" href="${esc(sources[i%sources.length][2])}">View search</a></div>`;return `<article class="job"><div><h4>${esc(j.title)}</h4><div class="meta"><b>${esc(j.company)}</b> · ${esc(j.location)}<br>${esc(j.salary)}+ · ${esc(j.type)} · ${esc(j.mode)}</div><div class="badges">${badges.map(s=>`<span class="badge">${esc(s)}</span>`).join('')}</div></div>${scoreHtml}</article>`}).join('');
-$('#aiSummary').innerHTML=`<b>CV-based matching:</b> ${esc(geo)}Searching for <b>${esc(role)}</b> within <b>${radius==='0'?'any distance':radius+' miles'}</b> of <b>${esc(loc)}</b>${salary?`, with a minimum target of <b>£${salary.toLocaleString('en-GB')}</b>`:''}. ${profileText.trim().length>=80?`The displayed percentages are calculated from this user's CV/skills and will change for another user. Detected evidence includes: <b>${esc(skillSet.slice(0,12).join(', ')||'profile text')}</b>.`:'No Match Score has been invented. Add a text CV or sufficiently detailed skills to calculate personalised scores.'} For production use, the same engine must receive the complete text of each real vacancy from an authorised job-data API.`;
-$('#resultLabel').textContent=`${sources.length} live source searches · ${jobs.length} ranked examples`;$('#results').hidden=false;status.textContent='Search workspace created';status.className='status good';$('#results').scrollIntoView({behavior:'smooth',block:'start'});
+$('#searchForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const role=$('#role').value.trim(),loc=$('#address').value.trim(),radius=$('#radius').value,salary=Number($('#salary').value||0),type=$('#workType').value,mode=$('#workMode').value,userSkills=$('#skills').value.trim();
+ const status=$('#status');status.textContent='Verifying location and retrieving live vacancies…';status.className='status';
+ const sources=makeSources(role,loc,radius,type);$('#sourceGrid').innerHTML=sources.map(x=>`<a class="source" target="_blank" rel="noopener" href="${esc(x[2])}"><b>${esc(x[0])}</b><span>${esc(x[1])} ↗</span></a>`).join('');
+ const origin=await postcodeCoordinates(loc);const originLabel=origin?formatPostcode(origin.postcode):loc.toUpperCase();
+ if(Number(radius)!==0&&!origin){
+  $('#jobList').innerHTML='<div class="empty"><b>An exact UK postcode is required for strict radius filtering.</b><br>Please enter a valid postcode such as PR1 2HE. No vacancy has been shown because its distance could not be verified.</div>';
+  $('#aiSummary').innerHTML='<b>Distance protection:</b> the application does not guess. When a postcode cannot be converted to coordinates, it shows no supposedly “nearby” vacancies.';
+  $('#resultLabel').textContent=`${sources.length} live source searches · 0 verified vacancies`;$('#results').hidden=false;status.textContent='Enter a valid UK postcode';status.className='status bad';$('#results').scrollIntoView({behavior:'smooth',block:'start'});return;
+ }
+ const usingAdzuna=Boolean($('#adzunaAppId').value.trim()&&$('#adzunaAppKey').value.trim());
+ try{
+  const rawJobs=await fetchRealJobs({q:role,location:loc,radius,type,mode,min_salary:salary});
+  const profileText=[cvText,userSkills].filter(Boolean).join(' ');const prefs={salary,type,mode,profileText};const jobs=await prepareJobs(rawJobs,origin,radius,prefs);
+  $('#jobList').innerHTML=jobs.length?jobs.map((j,i)=>renderJob(j,i,originLabel,prefs)).join(''):`<div class="empty"><b>No vacancies found.</b><br>No returned vacancy matched this job title and the selected filters. Try a broader/shorter job title (e.g. "Support" instead of "2nd Line IT Support Technician") or a larger radius.</div>`;
+  const skillSet=keywords(userSkills+' '+cvText);
+  const unverifiedCount=jobs.filter(j=>j.distanceUnverified).length;
+  $('#aiSummary').innerHTML=`<b>Location matching:</b> ${origin?`Distances are calculated from <b>${esc(originLabel)}</b> where the vacancy gives a precise UK postcode or coordinates.`:'Remote/anywhere mode is active.'} ${unverifiedCount?`For <b>${unverifiedCount}</b> vacancy(ies), the source only gave a place name (no exact postcode), so the distance could not be confirmed — check the address shown, or tap "View on map" to see exactly where it is.`:''} ${usingAdzuna?'Using your connected Adzuna live feed.':'Using free public feeds (Adzuna credentials not connected — add them above for wider UK coverage).'} Skills appear only when supplied by, or detected in, the vacancy description.${skillSet.length?` Your profile evidence includes: <b>${esc(skillSet.slice(0,12).join(', '))}</b>.`:''}`;
+  $('#resultLabel').textContent=`${sources.length} live source searches · ${jobs.length} vacancies found`;$('#results').hidden=false;status.textContent=jobs.length?'Vacancies loaded':'No vacancies returned';status.className=jobs.length?'status good':'status';$('#results').scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(err){
+  $('#jobList').innerHTML=`<div class="empty"><b>Vacancy service unavailable.</b><br>${esc(err&&err.message?err.message:'Unknown error')}. No unverified substitute results were created.</div>`;$('#aiSummary').innerHTML='<b>Data integrity:</b> the application failed closed. It does not replace unavailable real vacancies with fabricated examples.';$('#resultLabel').textContent=`${sources.length} live source searches · 0 verified vacancies`;$('#results').hidden=false;status.textContent='Vacancy service unavailable';status.className='status bad';
+ }
 // Log this search to Supabase analytics (same JobScout AI UK project)
 try{
   if(window.NTAnalytics && typeof window.NTAnalytics.logSearch === 'function'){
@@ -578,7 +734,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    Nothing is sent anywhere — it stays in this browser only, until "Forget saved profile" is used. */
 const STORAGE_KEY='jobscoutai_uk_profile_v1';
 function debounce(fn,ms){let t;return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
-function collectFormValues(){return {role:$('#role').value,address:$('#address').value,radius:$('#radius').value,salary:$('#salary').value,workType:$('#workType').value,workMode:$('#workMode').value,skills:$('#skills').value,consent:$('#consent').checked}}
+function collectFormValues(){return {role:$('#role').value,address:$('#address').value,radius:$('#radius').value,salary:$('#salary').value,workType:$('#workType').value,workMode:$('#workMode').value,skills:$('#skills').value,adzunaAppId:$('#adzunaAppId').value,adzunaAppKey:$('#adzunaAppKey').value,consent:$('#consent').checked}}
 function loadStoredProfile(){try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch(_){return null}}
 function saveProfile(cvMeta){
  const existing=loadStoredProfile()||{};
@@ -591,7 +747,7 @@ function applyProfile(data){
  if(!data)return;
  if(data.role)$('#role').value=data.role;
  if(data.address)$('#address').value=data.address;
- if(data.radius)$('#radius').value=data.radius;
+ if(data.radius)$('#radius').value=data.radius;if(data.adzunaAppId)$('#adzunaAppId').value=data.adzunaAppId;if(data.adzunaAppKey)$('#adzunaAppKey').value=data.adzunaAppKey;
  if(data.salary)$('#salary').value=data.salary;
  if(data.workType)$('#workType').value=data.workType;
  if(data.workMode)$('#workMode').value=data.workMode;
@@ -607,7 +763,7 @@ function updateStorageNote(data){
  note.innerHTML=`<b>On-device profile:</b> last saved ${esc(when)} in this browser.${cvBit}`;
 }
 const autoSave=debounce(()=>saveProfile(),500);
-['role','address','radius','salary','workType','workMode','skills','consent'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',autoSave);el.addEventListener('change',autoSave)});
+['role','address','radius','salary','workType','workMode','skills','adzunaAppId','adzunaAppKey','consent'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',autoSave);el.addEventListener('change',autoSave)});
 $('#searchForm').addEventListener('submit',()=>saveProfile());
 $('#btnForget').addEventListener('click',()=>{
  if(!confirm('Remove your saved profile and CV text from this browser? This cannot be undone.'))return;
