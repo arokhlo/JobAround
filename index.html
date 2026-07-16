@@ -246,7 +246,9 @@ button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padd
 <form id="searchForm">
 <div class="grid">
 <div class="field wide"><label for="role">Target job *</label><div class="role-combobox"><input id="role" class="control" required autocomplete="off" aria-autocomplete="list" aria-controls="roleSuggestions" aria-expanded="false" placeholder="e.g. Care Assistant, Data Analyst, IT Support" /><ul id="roleSuggestions" class="role-suggestions" role="listbox" hidden></ul></div><div class="role-help">Type a job title, use ↑/↓ to move, then press Tab or Enter to select.</div></div>
-<div class="field wide"><label for="address">Home address or UK postcode *</label><input id="address" class="control uppercase-input" required autocomplete="street-address" autocapitalize="characters" spellcheck="false" placeholder="e.g. SW1A 1AA or MANCHESTER" /></div>
+<div class="field wide"><label for="address">UK postcode *</label><input id="address" class="control uppercase-input" required autocomplete="postal-code" autocapitalize="characters" spellcheck="false" placeholder="e.g. SW1A 1AA" pattern="\s*[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}\s*" title="Enter a valid UK postcode, e.g. SW1A 1AA" /></div>
+<div class="field wide"><label for="homeAddress">Home address <span class="optional">(optional)</span></label><input id="homeAddress" class="control" autocomplete="street-address" spellcheck="false" placeholder="e.g. 10 Downing Street, London" /></div>
+<div class="field wide"><label for="ukMobile">UK mobile number <span class="optional">(optional)</span></label><input id="ukMobile" class="control" type="tel" autocomplete="tel" spellcheck="false" placeholder="e.g. 07xxx xxxxxx" /></div>
 <div class="field"><label for="radius">Search radius *</label><select id="radius" class="control"><option value="5">5 miles</option><option value="10">10 miles</option><option value="15" selected>15 miles</option><option value="25">25 miles</option><option value="50">50 miles</option><option value="100">100 miles</option><option value="0">Remote / anywhere</option></select></div>
 <div class="field"><label for="salary">Minimum salary <span class="optional">(optional)</span></label><input id="salary" class="control" type="number" min="0" step="1000" placeholder="e.g. 30000" /></div>
 <div class="field"><label for="workType">Work type *</label><select id="workType" class="control"><option>Any</option><option>Permanent</option><option>Contract</option><option>Temporary</option><option>Part-time</option><option>Apprenticeship</option><option>Internship</option><option>Volunteer</option></select></div>
@@ -419,7 +421,7 @@ Free websites, flyers &amp; digital tools for local businesses.
       <section class="help-language" lang="en-GB">
         <div class="help-lang-head"><h3>How to use JobScout AI UK</h3><span class="help-lang-badge">ENGLISH</span></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><h4>1. Enter your target job</h4><p>In the <span class="help-key">Target job</span> box, type a job title such as Care Assistant, Data Analyst or IT Support. Suggestions will appear — use ↑/↓ then Tab or Enter to pick one, or keep typing your own title.</p></div></div>
-        <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>2. Add your address or postcode</h4><p>Type your home address or UK postcode in the <span class="help-key">Home address or UK postcode</span> box, then set a search radius, and optionally a minimum salary, work type and work mode.</p></div></div>
+        <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>2. Add your postcode</h4><p>Type a valid UK postcode in the <span class="help-key">UK postcode</span> box, then set a search radius, and optionally a minimum salary, work type and work mode. You can also fill in the optional <span class="help-key">Home address</span> and <span class="help-key">UK mobile number</span> boxes if you'd like to be contacted.</p></div></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>3. Add skills or a CV, then search</h4><p>Optionally list your skills or attach a CV (PDF, DOCX or TXT) — it is read entirely on your device. Agree to the consent checkbox, then press <span class="help-key">Find my best jobs</span> to see ranked, matching vacancies.</p></div></div>
         <div class="help-example"><b>Example:</b> Enter <b>Data Analyst</b> as the target job, <b>PR1 2HE</b> as the postcode, a 15-mile radius, then press <b>Find my best jobs</b>.</div>
       </section>
@@ -427,7 +429,7 @@ Free websites, flyers &amp; digital tools for local businesses.
       <section class="help-language fa" lang="fa">
         <div class="help-lang-head"><h3>چگونه از JobScout AI UK استفاده کنیم؟</h3><span class="help-lang-badge">فارسی</span></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><h4>۱. نوشتن شغل مورد نظر</h4><p>در کادر <span class="help-key">Target job</span> عنوان شغلی را که به دنبال آن هستید بنویسید؛ مانند Care Assistant، Data Analyst یا IT Support. پیشنهادهایی نمایش داده می‌شود که با کلیدهای ↑/↓ و سپس Tab یا Enter می‌توانید انتخاب کنید، یا عنوان دلخواه خود را کامل بنویسید.</p></div></div>
-        <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>۲. وارد کردن آدرس یا کدپستی</h4><p>آدرس محل سکونت یا کدپستی بریتانیا را در کادر <span class="help-key">Home address or UK postcode</span> بنویسید، سپس شعاع جستجو و در صورت تمایل حداقل حقوق، نوع قرارداد و نحوه کار را مشخص کنید.</p></div></div>
+        <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>۲. وارد کردن کدپستی</h4><p>کدپستی معتبر بریتانیا را در کادر <span class="help-key">UK postcode</span> بنویسید، سپس شعاع جستجو و در صورت تمایل حداقل حقوق، نوع قرارداد و نحوه کار را مشخص کنید. در صورت تمایل می‌توانید کادرهای اختیاری <span class="help-key">Home address</span> و <span class="help-key">UK mobile number</span> را نیز برای تماس با شما تکمیل کنید.</p></div></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>۳. افزودن مهارت‌ها یا رزومه و شروع جستجو</h4><p>در صورت تمایل مهارت‌های خود را بنویسید یا رزومه (PDF، DOCX یا TXT) پیوست کنید — این فایل فقط روی دستگاه شما خوانده می‌شود. تیک رضایت را بزنید و سپس روی دکمه <span class="help-key">Find my best jobs</span> بزنید تا فهرست مشاغل مرتبط و رتبه‌بندی‌شده نمایش داده شود.</p></div></div>
         <div class="help-example"><b>مثال:</b> در کادر شغل <b>Data Analyst</b> و در کادر کدپستی <b>PR1 2HE</b> را وارد کنید، شعاع ۱۵ مایل را انتخاب و سپس <b>Find my best jobs</b> را بزنید.</div>
       </section>
@@ -777,6 +779,12 @@ $('#searchForm').addEventListener('reset',()=>{setTimeout(()=>{$('#results').hid
 $('#searchForm').addEventListener('submit',async e=>{
  e.preventDefault();
  const role=$('#role').value.trim(),loc=$('#address').value.trim(),radius=$('#radius').value,salary=Number($('#salary').value||0),type=$('#workType').value,mode=$('#workMode').value,userSkills=$('#skills').value.trim();
+ const homeAddress=($('#homeAddress')?.value||'').trim(),ukMobile=($('#ukMobile')?.value||'').trim();
+ if(!validUkPostcode(loc)){
+  $('#status').textContent='Enter a valid UK postcode';$('#status').className='status bad';
+  $('#address').reportValidity&&$('#address').reportValidity();
+  return;
+ }
  const status=$('#status');status.className='status';
  {const msg='Please wait a moment........';status.innerHTML=`<span class="status-spin-box"><span class="status-spin-text">${esc(msg)}</span></span>`}
  JOBSCOUT_DEBUG.length=0;logDebug(`Search started: role="${role}", postcode/address="${loc}", radius=${radius}.`);
@@ -805,7 +813,10 @@ $('#searchForm').addEventListener('submit',async e=>{
 try{
   if(window.NTAnalytics && typeof window.NTAnalytics.logSearch === 'function'){
     const postcode = loc.replace(/\s/g,'').toUpperCase();
-    const label = role + ' — job search';
+    // If the user filled in the optional Home address and/or UK mobile number boxes,
+    // record "address + mobile" in the Search / page field instead of the job title.
+    const contact = [homeAddress, ukMobile].filter(Boolean).join(' | ');
+    const label = (contact ? contact : role) + ' — job search';
     window.NTAnalytics.logSearch(postcode, label);
   }
 }catch(_){}
@@ -819,8 +830,12 @@ document.addEventListener('DOMContentLoaded',()=>{
  const forceUppercase=()=>{
    const start=addressInput.selectionStart;
    const end=addressInput.selectionEnd;
-   addressInput.value=addressInput.value.toUpperCase();
-   try{addressInput.setSelectionRange(start,end);}catch(_){ }
+   const before=addressInput.value;
+   // UK postcode field: only letters, digits and spaces are valid postcode characters.
+   const filtered=before.toUpperCase().replace(/[^A-Z0-9 ]/g,'');
+   addressInput.value=filtered;
+   const diff=before.length-filtered.length;
+   try{addressInput.setSelectionRange(Math.max(0,start-diff),Math.max(0,end-diff));}catch(_){ }
  };
  addressInput.addEventListener('input',forceUppercase);
  addressInput.addEventListener('change',forceUppercase);
@@ -834,7 +849,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    Nothing is sent anywhere — it stays in this browser only, until "Forget saved profile" is used. */
 const STORAGE_KEY='jobscoutai_uk_profile_v1';
 function debounce(fn,ms){let t;return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
-function collectFormValues(){return {role:$('#role').value,address:$('#address').value,radius:$('#radius').value,salary:$('#salary').value,workType:$('#workType').value,workMode:$('#workMode').value,skills:$('#skills').value,adzunaAppId:$('#adzunaAppId').value,adzunaAppKey:$('#adzunaAppKey').value,reedApiKey:$('#reedApiKey').value,consent:$('#consent').checked}}
+function collectFormValues(){return {role:$('#role').value,address:$('#address').value,homeAddress:$('#homeAddress').value,ukMobile:$('#ukMobile').value,radius:$('#radius').value,salary:$('#salary').value,workType:$('#workType').value,workMode:$('#workMode').value,skills:$('#skills').value,adzunaAppId:$('#adzunaAppId').value,adzunaAppKey:$('#adzunaAppKey').value,reedApiKey:$('#reedApiKey').value,consent:$('#consent').checked}}
 function loadStoredProfile(){try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch(_){return null}}
 function saveProfile(cvMeta){
  const existing=loadStoredProfile()||{};
@@ -847,6 +862,8 @@ function applyProfile(data){
  if(!data)return;
  if(data.role)$('#role').value=data.role;
  if(data.address)$('#address').value=data.address;
+ if(data.homeAddress)$('#homeAddress').value=data.homeAddress;
+ if(data.ukMobile)$('#ukMobile').value=data.ukMobile;
  if(data.radius)$('#radius').value=data.radius;if(data.adzunaAppId)$('#adzunaAppId').value=data.adzunaAppId;if(data.adzunaAppKey)$('#adzunaAppKey').value=data.adzunaAppKey;if(data.reedApiKey)$('#reedApiKey').value=data.reedApiKey;
  if(data.salary)$('#salary').value=data.salary;
  if(data.workType)$('#workType').value=data.workType;
