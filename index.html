@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>JobScout AI UK — intelligent local job discovery</title>
+<title>JobAroundU — intelligent local job discovery</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <style>
@@ -30,7 +30,7 @@ button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padd
 .business-card .offer{margin-top:6px;font:500 11.5px/1.4 'Inter',sans-serif;color:var(--muted)}
 @media(max-width:850px){.hero{grid-template-columns:1fr}.field,.field.wide,.field.compact,.field.narrow{grid-column:span 6}.source-grid{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr 1fr}.flow .step:last-child{grid-column:1/-1}}@media(max-width:560px){.app{padding:10px}.topbar{align-items:flex-start}.uk{display:none}.intro h2{font-size:29px}.field,.field.wide,.field.compact,.field.narrow{grid-column:1/-1}.source-grid{grid-template-columns:1fr}.job{grid-template-columns:1fr}.score{text-align:left}.actions{flex-wrap:wrap}.status{width:100%;margin:0}.flow{grid-template-columns:1fr}.flow .step:last-child{grid-column:auto}}
 
-/* Shared JobScout AI UK component colour aliases */
+/* Shared JobAroundU component colour aliases */
 :root{--os-green:var(--green);--os-green-light:var(--green2);--route-blue:var(--blue);--postbox-red:var(--red);--hairline:var(--line);--hairline-strong:#b7af98;--paper-raised:var(--card)}
   /* ---- Supabase admin analytics ---- */
   .admin-trigger{
@@ -248,7 +248,7 @@ button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padd
 </head>
 <body>
 <main class="app">
-<header class="topbar"><div class="brand"><div class="logo">JS</div><div><h1>JobScout AI UK</h1><div class="subtitle">Intelligent, location-aware job discovery across the UK</div></div></div><div class="header-actions">
+<header class="topbar"><div class="brand"><div class="logo">JS</div><div><h1>JobAroundU</h1><div class="subtitle">Intelligent, location-aware job discovery across the UK</div></div></div><div class="header-actions">
       <button type="button" class="help-launch-btn" id="helpLaunchBtn" aria-haspopup="dialog" aria-controls="helpOverlay" title="Help and guide | راهنما">
         <span class="help-launch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M9.8 9a2.35 2.35 0 114.1 1.57c-.75.75-1.9 1.17-1.9 2.43" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg></span>
         <span class="help-launch-text"><b class="full-label">Help</b><span class="help-launch-sep">|</span><b>راهنما</b><span class="help-launch-sep">EN/FA</span></span>
@@ -268,7 +268,7 @@ button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padd
   </span>
 </div>
 <section class="hero-compact">
-  <p class="tagline"><b>Personal job discovery engine.</b> Tell JobScout what you want, where you can travel and what you expect to earn — matched against real UK vacancies.</p>
+  <p class="tagline"><b>Personal job discovery engine.</b> Tell JobAroundU what you want, where you can travel and what you expect to earn — matched against real UK vacancies.</p>
   <button type="button" id="togglePrivacy" class="privacy-toggle" aria-expanded="false" aria-controls="privacyDetails">🔒 Privacy by design <span class="chev" aria-hidden="true">▾</span></button>
   <div id="privacyDetails" class="privacy-details" hidden>
     <div class="trust-row"><span class="tick">✓</span><span>Your CV is read entirely in your browser — it never leaves this device.</span></div>
@@ -309,7 +309,7 @@ button,input,select,textarea{font:inherit}.app{max-width:1180px;margin:auto;padd
 <details id="debugPanel" hidden style="margin:0 14px 14px;padding:10px 13px;border-radius:10px;background:#F5F2E9;border:1px solid #DED8C8;font-size:11px;color:#615B4F"><summary style="cursor:pointer;font-weight:700;color:var(--green)">Technical search log / گزارش فنی جستجو (این بخش را کامل کپی کنید)</summary><pre id="debugLog" style="white-space:pre-wrap;margin:8px 0 0;font:500 10.5px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;color:#615B4F">(no search run yet)</pre></details>
 <div id="jobList" class="job-list"></div>
 </section>
-<section class="panel architecture"><h3>How JobScout works today</h3><div class="flow"><div class="step"><b>1. Your profile, on this device</b>Your postcode, preferences and CV text are read and saved in this browser only — nothing is uploaded.</div><div class="step"><b>2. Real UK vacancies</b>Live listings are pulled from job feeds and matched against your search.</div><div class="step"><b>3. Distance &amp; fit scoring</b>Vacancies are ranked by distance from your postcode, salary fit and skills detected in your CV.</div><div class="step"><b>4. You apply directly</b>Every result links to the real job page — JobScout never applies on your behalf.</div></div><p class="roadmap-note"><b>Coming soon (not yet available):</b> saved search alerts, email notifications and an application tracker.</p></section>
+<section class="panel architecture"><h3>How JobAroundU works today</h3><div class="flow"><div class="step"><b>1. Your profile, on this device</b>Your postcode, preferences and CV text are read and saved in this browser only — nothing is uploaded.</div><div class="step"><b>2. Real UK vacancies</b>Live listings are pulled from job feeds and matched against your search.</div><div class="step"><b>3. Distance &amp; fit scoring</b>Vacancies are ranked by distance from your postcode, salary fit and skills detected in your CV.</div><div class="step"><b>4. You apply directly</b>Every result links to the real job page — JobAroundU never applies on your behalf.</div></div><p class="roadmap-note"><b>Coming soon (not yet available):</b> saved search alerts, email notifications and an application tracker.</p></section>
 <footer>
 <div class="business-card">
 <strong>Prepared by Dr Mortaza Arokhlo</strong><br>
@@ -324,7 +324,7 @@ Free websites, flyers &amp; digital tools for local businesses.
 
 <div class="admin-overlay" id="adminLoginOverlay" hidden>
   <section class="admin-login" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
-    <div class="admin-brand"><div class="admin-brand-icon">⌁</div><div><h2 id="adminLoginTitle">JobScout AI UK Admin</h2><p>Private visitor analytics powered by Supabase</p></div></div>
+    <div class="admin-brand"><div class="admin-brand-icon">⌁</div><div><h2 id="adminLoginTitle">JobAroundU Admin</h2><p>Private visitor analytics powered by Supabase</p></div></div>
     <div class="admin-field"><label for="adminKeyInput">Admin password</label><div class="admin-input-wrap"><input class="admin-input" type="password" id="adminKeyInput" placeholder="Enter your admin password" autocomplete="current-password"><button class="admin-password-toggle" id="adminPasswordToggle" type="button" aria-label="Show password">Show</button></div></div>
     <label class="admin-check"><input type="checkbox" id="adminRememberKey"> Remember this password on this device</label>
     <div class="admin-error" id="adminLoginError" aria-live="polite"></div>
@@ -336,7 +336,7 @@ Free websites, flyers &amp; digital tools for local businesses.
 
 <div class="admin-overlay" id="adminDashOverlay" hidden>
   <section class="admin-shell admin-dashboard" role="dialog" aria-modal="true" aria-labelledby="adminDashTitle">
-    <header class="admin-head"><div class="admin-head-main"><div class="admin-head-icon">⌁</div><div><h2 id="adminDashTitle">JobScout AI UK Analytics</h2><p><span class="admin-connection"><i class="admin-dot" id="adminConnectionDot"></i><span id="adminConnectionText">Supabase connected</span></span> · privacy-friendly session statistics</p></div></div><div class="admin-head-actions"><button type="button" class="admin-btn refresh-live" id="adminReloadBtn" title="Reload analytics">⟳ Refresh</button><button class="admin-icon-btn" id="adminDashClose" type="button" aria-label="Close dashboard">×</button></div></header>
+    <header class="admin-head"><div class="admin-head-main"><div class="admin-head-icon">⌁</div><div><h2 id="adminDashTitle">JobAroundU Analytics</h2><p><span class="admin-connection"><i class="admin-dot" id="adminConnectionDot"></i><span id="adminConnectionText">Supabase connected</span></span> · privacy-friendly session statistics</p></div></div><div class="admin-head-actions"><button type="button" class="admin-btn refresh-live" id="adminReloadBtn" title="Reload analytics">⟳ Refresh</button><button class="admin-icon-btn" id="adminDashClose" type="button" aria-label="Close dashboard">×</button></div></header>
     <div class="admin-body">
       <section class="admin-metrics" id="adminStatsGrid"></section>
       <section class="admin-grid">
@@ -407,7 +407,7 @@ Free websites, flyers &amp; digital tools for local businesses.
       <div class="feedback-head">
         <div class="feedback-badge">✉</div>
         <h2 id="feedbackTitle">We'd love your feedback</h2>
-        <p>Help us improve JobScout AI UK.<br>نظرات و پیشنهادات شما به بهتر شدن این سرویس کمک می‌کند.</p>
+        <p>Help us improve JobAroundU.<br>نظرات و پیشنهادات شما به بهتر شدن این سرویس کمک می‌کند.</p>
       </div>
       <form id="feedbackForm" novalidate>
         <div class="feedback-field">
@@ -456,7 +456,7 @@ Free websites, flyers &amp; digital tools for local businesses.
     </div>
     <div class="help-content">
       <section class="help-language" lang="en-GB">
-        <div class="help-lang-head"><h3>How to use JobScout AI UK</h3><span class="help-lang-badge">ENGLISH</span></div>
+        <div class="help-lang-head"><h3>How to use JobAroundU</h3><span class="help-lang-badge">ENGLISH</span></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><h4>1. Enter your target job</h4><p>In the <span class="help-key">Target job</span> box, type a job title such as Care Assistant, Data Analyst or IT Support. Suggestions will appear — use ↑/↓ then Tab or Enter to pick one, or keep typing your own title.</p></div></div>
         <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>2. Add your postcode</h4><p>Type a valid UK postcode in the <span class="help-key">UK postcode</span> box, then set a search radius, and optionally a minimum salary, work type and work mode. You can also fill in the optional <span class="help-key">Home address</span> and <span class="help-key">UK mobile number</span> boxes if you'd like to be contacted.</p></div></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>3. Add skills or a CV, then search</h4><p>Optionally list your skills or attach a CV (PDF, DOCX or TXT) — it is read entirely on your device. Agree to the consent checkbox, then press <span class="help-key">Find my best jobs</span> to see ranked, matching vacancies.</p></div></div>
@@ -464,7 +464,7 @@ Free websites, flyers &amp; digital tools for local businesses.
       </section>
 
       <section class="help-language fa" lang="fa">
-        <div class="help-lang-head"><h3>چگونه از JobScout AI UK استفاده کنیم؟</h3><span class="help-lang-badge">فارسی</span></div>
+        <div class="help-lang-head"><h3>چگونه از JobAroundU استفاده کنیم؟</h3><span class="help-lang-badge">فارسی</span></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><h4>۱. نوشتن شغل مورد نظر</h4><p>در کادر <span class="help-key">Target job</span> عنوان شغلی را که به دنبال آن هستید بنویسید؛ مانند Care Assistant، Data Analyst یا IT Support. پیشنهادهایی نمایش داده می‌شود که با کلیدهای ↑/↓ و سپس Tab یا Enter می‌توانید انتخاب کنید، یا عنوان دلخواه خود را کامل بنویسید.</p></div></div>
         <div class="help-step"><span class="help-locate-demo-wrap" aria-hidden="true"><button type="button" class="locate-btn help-locate-demo" tabindex="-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></span><div><h4>۲. وارد کردن کدپستی</h4><p>کدپستی معتبر بریتانیا را در کادر <span class="help-key">UK postcode</span> بنویسید، سپس شعاع جستجو و در صورت تمایل حداقل حقوق، نوع قرارداد و نحوه کار را مشخص کنید. در صورت تمایل می‌توانید کادرهای اختیاری <span class="help-key">Home address</span> و <span class="help-key">UK mobile number</span> را نیز برای تماس با شما تکمیل کنید.</p></div></div>
         <div class="help-step"><span class="help-step-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>۳. افزودن مهارت‌ها یا رزومه و شروع جستجو</h4><p>در صورت تمایل مهارت‌های خود را بنویسید یا رزومه (PDF، DOCX یا TXT) پیوست کنید — این فایل فقط روی دستگاه شما خوانده می‌شود. تیک رضایت را بزنید و سپس روی دکمه <span class="help-key">Find my best jobs</span> بزنید تا فهرست مشاغل مرتبط و رتبه‌بندی‌شده نمایش داده شود.</p></div></div>
@@ -574,7 +574,7 @@ function keywords(text){const stop=new Set('the and with for from that this have
   latitude, longitude, salary/salary_min, type, mode, description, url,
   skills. No sample vacancies or invented data are ever generated here.
 */
-const JOBS_API_ENDPOINT='https://jobaround-proxy.mortazazolfpour.workers.dev/search'; // e.g. 'https://jobscout-proxy.YOUR-SUBDOMAIN.workers.dev/search'
+const JOBS_API_ENDPOINT='https://jobaround-proxy.mortazazolfpour.workers.dev/search'; // e.g. 'https://JobAroundU-proxy.YOUR-SUBDOMAIN.workers.dev/search'
 const PUBLIC_JOB_FEEDS={
  arbeitnow:'https://www.arbeitnow.com/api/job-board-api',
  remotive:'https://remotive.com/api/remote-jobs'
@@ -591,8 +591,8 @@ const SKILL_TERMS=[
 function normalise(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+#. -]/g,' ').replace(/\s+/g,' ').trim()}
 function validUkPostcode(value){return /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(String(value||'').trim())}
 function formatPostcode(value){const raw=String(value||'').replace(/\s/g,'').toUpperCase();return raw.length>3?raw.slice(0,-3)+' '+raw.slice(-3):raw}
-const JOBSCOUT_DEBUG=[];
-function logDebug(msg){JOBSCOUT_DEBUG.push(`${new Date().toLocaleTimeString('en-GB')} — ${msg}`);if(JOBSCOUT_DEBUG.length>25)JOBSCOUT_DEBUG.shift()}
+const JobAroundU_DEBUG=[];
+function logDebug(msg){JobAroundU_DEBUG.push(`${new Date().toLocaleTimeString('en-GB')} — ${msg}`);if(JobAroundU_DEBUG.length>25)JobAroundU_DEBUG.shift()}
 async function postcodeCoordinates(value){
  // Accept either a bare postcode ("PR1 7NR") or a full address that contains
  // one somewhere inside it ("205 Emmanuel Street, PR1 7NR") — pull the
@@ -751,13 +751,13 @@ $('#searchForm').addEventListener('submit',async e=>{
  }
  const status=$('#status');status.className='status';
  {const msg='Please wait a moment........';status.innerHTML=`<span class="status-spin-box"><span class="status-spin-text">${esc(msg)}</span></span>`}
- JOBSCOUT_DEBUG.length=0;logDebug(`Search started: role="${role}", postcode/address="${loc}", radius=${radius}.`);
+ JobAroundU_DEBUG.length=0;logDebug(`Search started: role="${role}", postcode/address="${loc}", radius=${radius}.`);
  const sources=makeSources(role,loc,radius,type);$('#sourceGrid').innerHTML=sources.map(x=>`<a class="source" target="_blank" rel="noopener" href="${esc(x[2])}"><b>${esc(x[0])}</b><span>${esc(x[1])} ↗</span></a>`).join('');
  const origin=await postcodeCoordinates(loc);const originLabel=origin?formatPostcode(origin.postcode):loc.toUpperCase();
  if(Number(radius)!==0&&!origin){
   $('#jobList').innerHTML='<div class="empty"><b>An exact UK postcode is required for strict radius filtering.</b><br>Please enter a valid postcode such as PR1 2HE. No vacancy has been shown because its distance could not be verified.</div>';
   $('#aiSummary').innerHTML='<b>Distance protection:</b> the application does not guess. When a postcode cannot be converted to coordinates, it shows no supposedly “nearby” vacancies.';
-  $('#resultLabel').textContent=`${sources.length} live source searches · 0 verified vacancies`;$('#debugLog').textContent=JOBSCOUT_DEBUG.join('\n');$('#results').hidden=false;status.textContent='Enter a valid UK postcode';status.className='status bad';$('#results').scrollIntoView({behavior:'smooth',block:'start'});return;
+  $('#resultLabel').textContent=`${sources.length} live source searches · 0 verified vacancies`;$('#debugLog').textContent=JobAroundU_DEBUG.join('\n');$('#results').hidden=false;status.textContent='Enter a valid UK postcode';status.className='status bad';$('#results').scrollIntoView({behavior:'smooth',block:'start'});return;
  }
  try{
   const rawJobs=await fetchRealJobs({q:role,location:loc,radius,type,mode,min_salary:salary});
@@ -766,10 +766,10 @@ $('#searchForm').addEventListener('submit',async e=>{
   const skillSet=keywords(userSkills+' '+cvText);
   const unverifiedCount=jobs.filter(j=>j.distanceUnverified).length;
   $('#aiSummary').innerHTML=`<b>Location matching:</b> ${origin?`Distances are calculated from <b>${esc(originLabel)}</b> where the vacancy gives a precise UK postcode or coordinates.`:'Remote/anywhere mode is active.'} ${unverifiedCount?`For <b>${unverifiedCount}</b> vacancy(ies), the source only gave a place name (no exact postcode), so the distance could not be confirmed — check the address shown, or tap "View on map" to see exactly where it is.`:''} ${JOBS_API_ENDPOINT?'Using the main UK vacancy service.':'Using free public feeds only — general UK roles (driver, warehouse, retail, admin) may be limited until the main UK vacancy service is connected.'} Skills appear only when supplied by, or detected in, the vacancy description.${skillSet.length?` Your profile evidence includes: <b>${esc(skillSet.slice(0,12).join(', '))}</b>.`:''}`;
-  $('#resultLabel').textContent=`${sources.length} live source searches · ${jobs.length} vacancies found`;$('#debugLog').textContent=JOBSCOUT_DEBUG.join('\n');$('#results').hidden=false;status.textContent=jobs.length?'Vacancies loaded':'No vacancies returned';status.className=jobs.length?'status good':'status';$('#results').scrollIntoView({behavior:'smooth',block:'start'});
+  $('#resultLabel').textContent=`${sources.length} live source searches · ${jobs.length} vacancies found`;$('#debugLog').textContent=JobAroundU_DEBUG.join('\n');$('#results').hidden=false;status.textContent=jobs.length?'Vacancies loaded':'No vacancies returned';status.className=jobs.length?'status good':'status';$('#results').scrollIntoView({behavior:'smooth',block:'start'});
  }catch(err){
   logDebug(`Search failed with an exception: ${err&&err.message?err.message:err}`);
-  $('#jobList').innerHTML=`<div class="empty"><b>Vacancy service unavailable.</b><br>${esc(err&&err.message?err.message:'Unknown error')}. No unverified substitute results were created.</div>`;$('#aiSummary').innerHTML='<b>Data integrity:</b> the application failed closed. It does not replace unavailable real vacancies with fabricated examples.';$('#resultLabel').textContent=`${sources.length} live source searches · 0 verified vacancies`;$('#debugLog').textContent=JOBSCOUT_DEBUG.join('\n');$('#results').hidden=false;status.textContent='Vacancy service unavailable';status.className='status bad';
+  $('#jobList').innerHTML=`<div class="empty"><b>Vacancy service unavailable.</b><br>${esc(err&&err.message?err.message:'Unknown error')}. No unverified substitute results were created.</div>`;$('#aiSummary').innerHTML='<b>Data integrity:</b> the application failed closed. It does not replace unavailable real vacancies with fabricated examples.';$('#resultLabel').textContent=`${sources.length} live source searches · 0 verified vacancies`;$('#debugLog').textContent=JobAroundU_DEBUG.join('\n');$('#results').hidden=false;status.textContent='Vacancy service unavailable';status.className='status bad';
  }
 // Log this search to anonymous usage analytics (postcode area + job title
 // searched for only). Home address and mobile number are never sent anywhere —
@@ -808,7 +808,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* On-device profile persistence: saves the search profile and extracted CV text to this
    browser's localStorage, so returning to this page on the same device pre-fills everything.
    Nothing is sent anywhere — it stays in this browser only, until "Forget saved profile" is used. */
-const STORAGE_KEY='jobscoutai_uk_profile_v1';
+const STORAGE_KEY='JobAroundU_uk_profile_v1';
 function debounce(fn,ms){let t;return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
 function collectFormValues(){return {role:$('#role').value,address:$('#address').value,homeAddress:$('#homeAddress').value,ukMobile:$('#ukMobile').value,radius:$('#radius').value,salary:$('#salary').value,workType:$('#workType').value,workMode:$('#workMode').value,skills:$('#skills').value,consent:$('#consent').checked}}
 function loadStoredProfile(){try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch(_){return null}}
@@ -853,7 +853,7 @@ const autoSave=debounce(()=>saveProfile(),500);
    : '+ More options: salary, work type, CV, skills... / گزینه‌های بیشتر: حقوق، نوع کار، رزومه، مهارت‌ها...';
  }
  toggleBtn.addEventListener('click',()=>setOpen(panel.hidden));
- window.__jobscoutOpenAdvancedIfFilled=function(){
+ window.__JobAroundUOpenAdvancedIfFilled=function(){
   if($('#salary').value||$('#skills').value||$('#homeAddress').value||$('#ukMobile').value||$('#workMode').value!=='Any')setOpen(true);
  };
 })();
@@ -881,7 +881,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  }else{
   updateStorageNote(null);
  }
- if(typeof window.__jobscoutOpenAdvancedIfFilled==='function')window.__jobscoutOpenAdvancedIfFilled();
+ if(typeof window.__JobAroundUOpenAdvancedIfFilled==='function')window.__JobAroundUOpenAdvancedIfFilled();
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
@@ -895,17 +895,17 @@ document.addEventListener('DOMContentLoaded',()=>{
 (function(){
   'use strict';
 
-// Supabase project: jobscout-ai-uk (public browser credentials only)
+// Supabase project: JobAroundU-ai-uk (public browser credentials only)
   const SUPABASE_URL='https://gmbdalrwbpygvenvoqzi.supabase.co';
     const SUPABASE_ANON='sb_publishable_hu-l_FzRxZjR77rs3hBfAg_DpvkGDM9';
 
   const ONLINE_WINDOW_SECONDS = 90;
   const HEARTBEAT_MS = 45000;
-  const ADMIN_SESSION_KEY = 'jobscout_ai_uk_admin_hash';
-  const ADMIN_LOCAL_KEY = 'jobscout_ai_uk_admin_hash_remembered';
-  const VISITOR_KEY = 'jobscout_ai_uk_visitor_id';
-  const SESSION_KEY = 'jobscout_ai_uk_session_id';
-  const USER_POSTCODE_KEY = 'jobscout_ai_uk_user_postcode';
+  const ADMIN_SESSION_KEY = 'JobAroundU_ai_uk_admin_hash';
+  const ADMIN_LOCAL_KEY = 'JobAroundU_ai_uk_admin_hash_remembered';
+  const VISITOR_KEY = 'JobAroundU_ai_uk_visitor_id';
+  const SESSION_KEY = 'JobAroundU_ai_uk_session_id';
+  const USER_POSTCODE_KEY = 'JobAroundU_ai_uk_user_postcode';
 
   const configured = !SUPABASE_URL.includes('YOUR-PROJECT') && !SUPABASE_ANON.includes('YOUR-SUPABASE');
   const client = configured && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON, {auth:{persistSession:false,autoRefreshToken:false}}) : null;
@@ -1002,7 +1002,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   function logout(){adminHash='';sessionStorage.removeItem(ADMIN_SESSION_KEY);localStorage.removeItem(ADMIN_LOCAL_KEY);closeDash()}
 
-  $('adminExportBtn').addEventListener('click',()=>{const rows=filteredRows();const header=['Time','Type','Visitor','Session','User postcode','Search postcode','Search','Resolved place','Browser','Device','Timezone'];const lines=[header.map(csv).join(',')];rows.forEach(r=>lines.push([r.created_at,r.type,r.visitor_id,r.session_id,r.user_postcode,r.postcode,r.search_query,r.resolved_label,r.browser,r.device_type,r.timezone].map(csv).join(',')));const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jobscout-ai-uk-analytics-'+new Date().toISOString().slice(0,10)+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+  $('adminExportBtn').addEventListener('click',()=>{const rows=filteredRows();const header=['Time','Type','Visitor','Session','User postcode','Search postcode','Search','Resolved place','Browser','Device','Timezone'];const lines=[header.map(csv).join(',')];rows.forEach(r=>lines.push([r.created_at,r.type,r.visitor_id,r.session_id,r.user_postcode,r.postcode,r.search_query,r.resolved_label,r.browser,r.device_type,r.timezone].map(csv).join(',')));const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='JobAroundU-ai-uk-analytics-'+new Date().toISOString().slice(0,10)+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
   function csv(v){const s=String(v||'');return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
 
   $('adminSettingsBtn').addEventListener('click',()=>{$('adminCurrentKey').value='';$('adminNewKey').value='';$('adminConfirmKey').value='';$('adminSettingsError').textContent='';els.settings.hidden=false;setTimeout(()=>$('adminCurrentKey').focus(),30)});
@@ -1022,8 +1022,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     els.feedbackTable.innerHTML=`<table class="admin-table"><thead><tr><th>Time</th><th>Name</th><th>Email</th><th>Mobile</th><th>Message</th><th>Actions</th></tr></thead><tbody>${rows.slice(0,500).map(r=>{
       const email=String(r.email||'').trim();
       const mobile=String(r.mobile||'').trim();
-      const subject=encodeURIComponent('Reply from JobScout AI UK: https://arokhlo.github.io/jobscout-ai-uk/');
-      const body=encodeURIComponent(`Hello ${r.name||''},\n\nThank you for your feedback regarding JobScout AI UK: https://arokhlo.github.io/jobscout-ai-uk/\n\n`);
+      const subject=encodeURIComponent('Reply from JobAroundU: https://arokhlo.github.io/JobAroundU-ai-uk/');
+      const body=encodeURIComponent(`Hello ${r.name||''},\n\nThank you for your feedback regarding JobAroundU: https://arokhlo.github.io/JobAroundU-ai-uk/\n\n`);
       const replyHref=email?`mailto:${encodeURIComponent(email)}?subject=${subject}&body=${body}`:(mobile?`sms:${encodeURIComponent(mobile)}?body=${body}`:'#');
       return `<tr data-feedback-id="${Number(r.id)}"><td>${escapeHtml(formatDate(r.created_at))}</td><td>${escapeHtml(r.name||'—')}</td><td>${email?`<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`:'—'}</td><td>${mobile?`<a href="tel:${escapeHtml(mobile)}">${escapeHtml(mobile)}</a>`:'—'}</td><td class="admin-feedback-message">${escapeHtml(r.message||'—')}</td><td><div class="admin-row-actions"><a class="admin-row-btn reply" href="${escapeHtml(replyHref)}" ${replyHref==='#'?'aria-disabled="true" onclick="return false"':''}>Reply</a><button type="button" class="admin-row-btn delete" data-delete-feedback="${Number(r.id)}" data-feedback-name="${escapeHtml(r.name||'this user')}">Delete</button></div></td></tr>`
     }).join('')}</tbody></table>`
@@ -1034,8 +1034,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   function buildSetupSql(adminKeyHash){
     const hash=String(adminKeyHash||'').replace(/[^a-f0-9]/gi,'').toLowerCase();
-    return `-- JobScout AI UK: complete Supabase setup and admin password reset
--- Generated inside JobScoutAI-UK8-deep.html
+    return `-- JobAroundU: complete Supabase setup and admin password reset
+-- Generated inside JobAroundU-UK8-deep.html
 begin;
 
 create extension if not exists pgcrypto;
@@ -1474,7 +1474,7 @@ commit;`;
     const dismissBtn=document.getElementById('fvbDismiss');
     const videoLink=document.getElementById('fvbVideoLink');
     if(!banner)return;
-    const SEEN_KEY='jobscout_seen_intro_banner_v1';
+    const SEEN_KEY='JobAroundU_seen_intro_banner_v1';
     try{
       if(!localStorage.getItem(SEEN_KEY))banner.hidden=false;
     }catch(_){banner.hidden=false}
@@ -1574,10 +1574,10 @@ commit;`;
   if(!form) return;
   form.addEventListener('submit',function(){
     try{
-      window.dispatchEvent(new CustomEvent('jobscout-ai-uk-search',{detail:{
+      window.dispatchEvent(new CustomEvent('JobAroundU-ai-uk-search',{detail:{
         postcode:(document.getElementById('address')||{}).value||'',
         query:(document.getElementById('role')||{}).value||'',
-        source:'jobscout-ai-uk'
+        source:'JobAroundU-ai-uk'
       }}));
     }catch(_){ }
   });
